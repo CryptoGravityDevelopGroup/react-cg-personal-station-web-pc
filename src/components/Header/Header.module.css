@@ -1,0 +1,46 @@
+.headerWrap {
+  height: 100rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 120rem;
+}
+.headeLeft {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  width: 200rem;
+}
+
+.goHomeBtn {
+  width: 112rem;
+  height: 46rem;
+  background: #176ff2;
+  border-radius: 23rem 23rem 23rem 23rem;
+  opacity: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goBackIcon {
+  width: 12rem;
+  height: 12rem;
+  margin-right: 4rem;
+}
+.goBackContent {
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 26px;
+}

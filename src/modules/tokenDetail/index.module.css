@@ -1,0 +1,57 @@
+.tokenDetail {
+  padding: 36rem 120rem 24rem;
+}
+.title {
+  font-size: 36px;
+  font-weight: bolder;
+  line-height: 45px;
+  letter-spacing: 0.3px;
+  color: #2d2f35;
+  margin-bottom: 8rem;
+}
+.detail {
+  font-size: 16rem;
+  font-weight: normal;
+  color: #454c66;
+  line-height: 26rem;
+}
+.tokenList {
+  padding: 0 120rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.tokenItem {
+  width: 282rem;
+  display: flex;
+  align-items: center;
+  border-radius: 20rem;
+  background: #f4f5f6;
+  padding: 24rem 24rem;
+  box-sizing: border-box;
+  margin-bottom: 28rem;
+}
+.tokenLogo {
+  width: 52rem;
+  height: 52rem;
+  border-radius: 42rem;
+  margin-right: 24rem;
+}
+.tokenName {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+  color: #0f1229;
+}
+.tokenNum {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+  color: #0f1229;
+}
+.tokenPrice {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  color: #454c66;
+}

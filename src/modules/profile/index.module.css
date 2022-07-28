@@ -1,0 +1,268 @@
+.profileWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35rem;
+}
+.userHeadPic {
+  width: 98rem;
+  height: 98rem;
+  border-radius: 50rem;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.userName {
+  font-size: 32px;
+  font-weight: normal;
+  color: #0e1228;
+  line-height: 45px;
+  margin-bottom: 14px;
+}
+.tagWrap {
+  display: flex;
+}
+.tagItem {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(55, 114, 255, 0.1);
+  font-size: 12px;
+  font-weight: normal;
+  color: #3772ff;
+  line-height: 24px;
+  margin-right: 8px;
+}
+.introduce {
+  width: 668rem;
+  border-radius: 10px;
+  padding: 20rem 10rem;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  color: #454c66;
+}
+.leftSliderList {
+  position: absolute;
+  top: 156px;
+  right: 10px;
+}
+.leftSliderItem {
+  width: 50rem;
+  height: 50rem;
+  border-radius: 25rem;
+  background: rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.tokenWrap {
+  margin-top: 66px;
+  padding: 0 120rem 125rem 120rem;
+}
+.tokenDescribe {
+  height: 144px;
+  padding: 0 56px;
+  display: flex;
+  align-items: center;
+}
+.profileTitle {
+  font-size: 36px;
+  font-weight: normal;
+  line-height: 45px;
+  color: #2d2f35;
+}
+.describeContent {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 26px;
+  color: #454c66;
+  margin-left: 28px;
+}
+.tokenList {
+  display: flex;
+  justify-content: space-between;
+}
+.tokenItem {
+  width: 246.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 20rem;
+  background: #f4f5f6;
+  padding: 24rem 16rem;
+}
+.tokenLogo {
+  width: 52rem;
+  height: 52rem;
+  border-radius: 42rem;
+  margin-right: 24rem;
+}
+.tokenName {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 22px;
+  color: #0f1229;
+}
+.tokenNum {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 22px;
+  color: #0f1229;
+}
+.tokenPrice {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  color: #454c66;
+}
+.showMoreWrap {
+  width: 118rem;
+  height: 117rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20rem;
+  background: #f4f5f6;
+  cursor: pointer;
+}
+.showMoreContent {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 22px;
+  color: #454c66;
+}
+.nftWrap {
+  margin-top: 66rem;
+  padding: 0 120rem 125rem 120rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+.nftDescribe {
+  width: 350rem;
+}
+.nftPlateTitle {
+  font-size: 36px;
+  font-weight: normal;
+  line-height: 45px;
+  color: #2d2f35;
+  padding: 0 0 54rem 53rem;
+}
+.nftDescribeContent {
+  font-size: 16rem;
+  font-weight: normal;
+  line-height: 26rem;
+  color: #454c66;
+}
+.nftShowMore {
+  width: 149px;
+  height: 51px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px 13px 16px;
+  border-radius: 25px;
+  background: #ffffff;
+  box-sizing: border-box;
+  border: 1px solid #f1f1f1;
+  margin-top: 24rem;
+  cursor: pointer;
+}
+.showMoreContent {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 26px;
+  letter-spacing: 0.16px;
+  color: #101010;
+  margin-right: 11rem;
+}
+.nftList {
+  display: flex;
+  flex-wrap: wrap;
+  width: 880rem;
+  height: 523rem;
+  padding-top: 20px;
+  padding-left: 66px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(246, 246, 246, 0) -3%,
+    rgba(246, 246, 246, 0) -3%,
+    #f6f6f6 100%,
+    #f6f6f6 100%
+  );
+  border-radius: 64px;
+}
+.nftItem {
+  width: 144rem;
+  height: 189rem;
+  margin-right: 72rem;
+  border-radius: 16rem;
+  overflow: hidden;
+  position: relative;
+}
+.nftInfo {
+  padding: 8px 12px 12px 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  position: absolute;
+  top: 128rem;
+}
+.nftTitle {
+  width: 120px;
+  height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #22262e;
+  line-height: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.nftPrice {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 17px;
+  color: #45b26b;
+}
+.QAWrap {
+  margin-top: 128rem;
+  padding: 0 120rem;
+}
+.QADescribe {
+  height: 100rem;
+  display: flex;
+  align-items: center;
+}
+.QATitle {
+  font-size: 36px;
+  font-weight: bolder;
+  color: #2d2f35;
+}
+.QAItem {
+  margin-top: 50rem;
+}
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35rem;
+  font-size: 25px;
+  font-weight: bolder;
+  color: #0f0f0f;
+  line-height: 35px;
+  margin-bottom: 30rem;
+}
+.arrow {
+  width: 24rem;
+  height: 24rem;
+  cursor: pointer;
+}
+.answer {
+  padding: 30rem 0;
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+}

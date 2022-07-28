@@ -1,0 +1,26 @@
+.content {
+  width: 687rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.successPicWrap {
+  margin-bottom: 25rem;
+}
+.title {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 34px;
+  color: rgba(0, 0, 0, 0.85);
+}
+.tips {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.45);
+  margin-top: 24px;
+  width: 264rem;
+  text-align: center;
+  margin-bottom: 48px;
+}

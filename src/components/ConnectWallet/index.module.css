@@ -1,0 +1,14 @@
+.connectWallte {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+}
+.loading {
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 28px;
+  letter-spacing: 0px;
+  display: flex;
+  align-items: center;
+}

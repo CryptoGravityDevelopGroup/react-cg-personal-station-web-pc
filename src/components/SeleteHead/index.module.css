@@ -1,0 +1,31 @@
+.headerPicWrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24rem 15rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.headerPicItem {
+  width: 144rem;
+  height: 144rem;
+  margin: 0 36rem 38rem 0;
+  position: relative;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+.headerPicItem:nth-of-type(4n) {
+  margin: 0 0 38rem 0;
+}
+.headerPicImg {
+  height: 100%;
+}
+.tickWrap {
+  background-color: green;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}

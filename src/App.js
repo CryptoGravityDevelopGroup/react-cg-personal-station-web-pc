@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from "react";
 import './App.css';
+import Main from "./modules/main/index.tsx";
 
 function App() {
+  // 自适应
+  useEffect(() => {
+    window.onload = function () {
+        getRem(1440, 1)
+    };
+    window.onresize = function () {
+        console.log('asd');
+        getRem(1440, 1)
+    };
+    
+    function getRem(pwidth, prem) {
+        const html = document.getElementsByTagName("html")[0];
+        const oWidth = document.body.clientWidth || document.documentElement.clientWidth;
+        html.style.fontSize = oWidth / pwidth * prem + "px";
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/main" element={<Main/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

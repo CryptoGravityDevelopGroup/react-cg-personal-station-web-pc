@@ -1,0 +1,43 @@
+.warp {
+  width: 30rem;
+  height: 30rem;
+  position: relative;
+  cursor: pointer;
+}
+.menuList {
+  position: absolute;
+  top: 40rem;
+  right: 0;
+  background-color: #fff;
+  width: 256rem;
+  padding: 8rem 16rem;
+  border-radius: 5px;
+  z-index: 999;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  height: 65rem;
+  cursor: pointer;
+  border-bottom: 1px solid #e6e8ec;
+}
+.menuItem:last-child {
+  border-bottom: 0;
+}
+.itemIcon {
+  width: 24rem;
+  height: 24rem;
+  margin-right: 8px;
+}
+.itemName {
+  font-size: 16rem;
+  font-weight: normal;
+  color: #23262f;
+}
+.aqModalContentWarp {
+  padding: 24rem;
+  overflow-y: scroll;
+  max-height: 555rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}

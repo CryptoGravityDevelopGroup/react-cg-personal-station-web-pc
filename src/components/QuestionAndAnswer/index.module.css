@@ -1,0 +1,57 @@
+.wrap {
+  width: 687rem;
+  margin: 0 auto;
+}
+.qaItem {
+  width: 687rem;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+  border: 1px solid #ebeff5;
+  position: relative;
+  margin-bottom: 20px;
+}
+.deletBtn {
+  position: absolute;
+  top: 8px;
+  right: 24px;
+  cursor: pointer;
+}
+.title {
+  display: flex;
+  font-size: 14px;
+  font-weight: normal;
+  color: #b1b5c3;
+  height: 24px;
+  line-height: 24px;
+  margin-bottom: 12px;
+}
+
+.addQuestion {
+  width: 688rem;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+  border: 1px dashed #ebeff5;
+  margin: 0 auto 54px;
+  cursor: pointer;
+}
+
+.addBtnPic {
+  width: 16rem;
+  height: 16rem;
+  margin-right: 10px;
+}
+
+.addContent {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 24px;
+  color: #2d2f35;
+}

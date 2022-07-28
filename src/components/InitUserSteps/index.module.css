@@ -1,0 +1,32 @@
+.initUserSteps {
+  width: 688rem;
+  margin: 24px auto 54px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 54rem;
+}
+.steps {
+  height: 24rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepsName {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: rgba(0, 0, 0, 0.25);
+  margin: 0 12rem;
+}
+.stepsComplete {
+  color: #3772ff;
+}
+.stepsLine {
+  display: inline-block;
+  width: 130rem;
+  height: 1.1px;
+  background: rgba(0, 0, 0, 0.25);
+  margin-right: 12rem;
+}
