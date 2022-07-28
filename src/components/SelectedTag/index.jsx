@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import Modal from '../Modal';
+import Modal from '../Modal/index.tsx';
 import styles from './index.module.css';
 import addTagPic from '../../static/add-tag.png';
 import deleteTagPic from '../../static/delete-tag.png';

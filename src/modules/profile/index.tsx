@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import Header from "./components/Header";
+import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
 import { getUserInfo } from '../../api/user';
 import userDefaultPic from '../../static/userDefaultPic.png'
@@ -23,7 +23,7 @@ import arrowUpPic from '../../static/arrow-up.png';
 import arrowDownPic from '../../static/arrow-down.png';
 
 export default function Index() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [QAList, setQAList] = useState([
     {
       status: false,
@@ -165,7 +165,7 @@ export default function Index() {
             })
           }
           <div className={style.showMoreWrap}  onClick={() => {
-            router.push('/tokenDetail');
+            navigate.push('/tokenDetail');
           }}>
             <img width={24} height={24} src={moreBtn} alt="moreBtn" />
             <div className={style.showMoreContent}>show more</div>
@@ -182,7 +182,7 @@ export default function Index() {
             <div>最早2021年10月31日购买第一个nft，购买NFT共计花费24eth。其中xx、xx、xx项目的nft有着良好的市场表现</div>
           </div>
           <div className={style.nftShowMore} onClick={() => {
-            router.push('/nftDetail');
+            navigate.push('/nftDetail');
           }}>
             <div className={style.showMoreContent}>show more</div>
             <img width={18} height={18} src={moreBtn} alt="moreBtn" />

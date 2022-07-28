@@ -1,7 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from "react";
 import './App.css';
 import Main from "./modules/main/index.tsx";
+import Inituser from "./modules/inituser/index.tsx";
+import NftDetail from "./modules/nftDetail/index.tsx";
+import Profile from "./modules/profile/index.tsx";
+import TokenDetail from "./modules/tokenDetail/index.tsx";
 
 function App() {
   // 自适应
@@ -10,7 +14,6 @@ function App() {
         getRem(1440, 1)
     };
     window.onresize = function () {
-        console.log('asd');
         getRem(1440, 1)
     };
     
@@ -24,6 +27,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/main" element={<Main/>}/>
+        <Route path="/inituser" element={<Inituser/>}/>
+        <Route path="/nftDetial" element={<NftDetail/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/tokenDetail" element={<TokenDetail/>}/>
+        <Route path="/*" element={<Navigate to="/main"/>}></Route>
       </Routes>
     </BrowserRouter>
   );

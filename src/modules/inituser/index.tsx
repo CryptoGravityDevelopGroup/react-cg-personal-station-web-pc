@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Header from "./components/Header";
-import ConnectWallet from "./components/ConnectWallet";
-import InitUserSteps from "./components/InitUserSteps";
-import Profile from "./components/Profile";
-import QuestionAndAnswer from "./components/QuestionAndAnswer";
-import ProfileDown from "./components/ProfileDown";
+import Header from "../../components/Header/index.tsx";
+import ConnectWallet from "../../components/ConnectWallet/index.tsx";
+import InitUserSteps from "../../components/InitUserSteps/index.tsx";
+import Profile from "../../components/Profile/index.tsx";
+import QuestionAndAnswer from "../../components/QuestionAndAnswer/index.tsx";
+import ProfileDown from "../../components/ProfileDown/index.tsx";
 import style from './index.module.css';
 import { registerUser } from '../../api/user';
 import { getCurAddress } from '../../utils/tool'

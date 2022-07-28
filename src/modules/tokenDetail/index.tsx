@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from "./components/Header";
+import Header from "../../components/Header/index.tsx";
 import bitLogo from '../../static/bit-logo.png';
 import ethLogo from '../../static/eth-logo.png';
 import usdtLogo from '../../static/usdt-logo.png';

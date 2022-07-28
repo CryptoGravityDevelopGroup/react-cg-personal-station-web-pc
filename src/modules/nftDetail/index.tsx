@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from "./components/Header";
+import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
 import demo1Pic from '../../static/demo-1.png';
 import demo2Pic from '../../static/demo-2.png';
