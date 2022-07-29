@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path=require('path')
 module.exports = function override(config) {
     const fallback = config.resolve.fallback || {};
     Object.assign(fallback, {
@@ -18,5 +19,8 @@ module.exports = function override(config) {
         })
     ])
     config.ignoreWarnings = [/Failed to parse source map/];
+    config.resolve.alias = {
+        '@':path.join(__dirname,'./src')
+    }
     return config;
 }

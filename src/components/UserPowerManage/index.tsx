@@ -42,7 +42,7 @@ export default function Index() {
   return (
     <>
       <div className={styles.warp} ref={menuList}>
-        <img src={upmBtnPic} alt="upmBtnPic" onClick={() => {
+        <img src={upmBtnPic} alt="upmBtnPic" className={styles.upmBtnPicContent} onClick={() => {
           setMenuListStatus(!menuListStatus);
         }} />
         {

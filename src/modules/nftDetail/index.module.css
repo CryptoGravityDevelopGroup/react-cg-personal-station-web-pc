@@ -29,6 +29,9 @@
   overflow: hidden;
   position: relative;
 }
+.nftItem img {
+  width: 100%;
+}
 .nftInfo {
   padding: 8px 12px 12px 12px;
   border-radius: 16px;

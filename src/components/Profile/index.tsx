@@ -7,13 +7,13 @@ import { getUserInfo } from '../../api/user';
 import "antd/dist/antd.css";
 import styles from './index.module.css';
 
-import twitterPic from '../../static/twitter.png';
-import telegramPic from '../../static/telegram.png';
-import instagramPic from '../../static/instagram.png';
+import twitterPic from '@/static/twitter.png';
+import telegramPic from '@/static/telegram.png';
+import instagramPic from '@/static/instagram.png';
+import defaultUserPic from '@/static/default_user.png';
 
 export default function Index(props) {
   const { onNext } = props;
-  const defaultUserPic = './default_user.png';
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
   const [formdata, setFormdata] = useState({});
