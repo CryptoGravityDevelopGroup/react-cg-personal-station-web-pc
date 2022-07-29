@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { Button, Form, Input, Row, Col } from 'antd';
 import SelectedHead from '../SeleteHead';
 import SelectedTag from '../SelectedTag';
-import { getUserInfo } from '../../api/user';
+// import { getUserInfo } from '../../api/user';
 
 import "antd/dist/antd.css";
 import styles from './index.module.css';
@@ -17,7 +17,7 @@ export default function Index(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
   const [formdata, setFormdata] = useState({});
-  const [headerPicArr, setHeaderPicArr] = useState([])
+  const [headerPicArr] = useState([])
   const { TextArea } = Input;
   const handleHeadImgChange = (imgIndex) => {
     setIsModalVisible(false);

@@ -13,12 +13,12 @@ import ethLogo from '../../static/eth-logo.png';
 import usdtLogo from '../../static/usdt-logo.png';
 import rippleLogo from '../../static/ripple-logo.png';
 import moreBtn from '../../static/more-btn.png';
-import demo1Pic from '../../static/demo-1.png';
-import demo2Pic from '../../static/demo-2.png';
-import demo3Pic from '../../static/demo-3.png';
-import demo4Pic from '../../static/demo-4.png';
-import demo5Pic from '../../static/demo-5.png';
-import demo6Pic from '../../static/demo-6.png';
+// import demo1Pic from '../../static/demo-1.png';
+// import demo2Pic from '../../static/demo-2.png';
+// import demo3Pic from '../../static/demo-3.png';
+// import demo4Pic from '../../static/demo-4.png';
+// import demo5Pic from '../../static/demo-5.png';
+// import demo6Pic from '../../static/demo-6.png';
 import arrowUpPic from '../../static/arrow-up.png';
 import arrowDownPic from '../../static/arrow-down.png';
 
@@ -64,33 +64,33 @@ export default function Index() {
       tokenPrice:'$25,524.54'
     }
   ];
-  const nftListMock = [
-    {
-      img:demo1Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo2Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo3Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo4Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo5Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo6Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    }
-  ]
+  // const nftListMock = [
+  //   {
+  //     img:demo1Pic,
+  //     title: 'Community x Community x Community x',
+  //     price: '2.45'
+  //   },{
+  //     img:demo2Pic,
+  //     title: 'Community x Community x Community x',
+  //     price: '2.45'
+  //   },{
+  //     img:demo3Pic,
+  //     title: 'Community x Community x Community x',
+  //     price: '2.45'
+  //   },{
+  //     img:demo4Pic,
+  //     title: 'Community x Community x Community x',
+  //     price: '2.45'
+  //   },{
+  //     img:demo5Pic,
+  //     title: 'Community x Community x Community x',
+  //     price: '2.45'
+  //   },{
+  //     img:demo6Pic,
+  //     title: 'Community x Community x Community x',
+  //     price: '2.45'
+  //   }
+  // ]
   const handleQuestionClick = (index) =>{
     QAList[index].status = !QAList[index].status;
     setQAList([...QAList]);
@@ -117,6 +117,7 @@ export default function Index() {
         setTokenList(tokenListMock);
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
