@@ -19,7 +19,7 @@ export default function Index(props) {
   const handleInputKeyUp = (keyCode) => {
     if(tagInputRed) {
       let inputVal = tagInputRed.current.value;
-      if(keyCode == 13 && inputVal.length > 0) { // 回车
+      if(keyCode === 13 && inputVal.length > 0) { // 回车
         addNewTag(inputVal);
         tagInputRed.current.value = null;
       }
@@ -31,7 +31,7 @@ export default function Index(props) {
   }
   useEffect(() => {
     onTagChange(newTagList);
-  },[newTagList])
+  },[newTagList, onTagChange])
   return (
     <>
       <div className={styles.wrap}>

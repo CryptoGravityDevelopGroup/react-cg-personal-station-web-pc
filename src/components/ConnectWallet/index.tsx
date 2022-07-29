@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import style from './index.module.css';
 
 import loadingPic from '../../static/loading.png';
 
 export default function Index(porps) {
-  const { onNext } = porps;
+  // const { onNext } = porps;
   return (
     <div className={style.connectWallte}>
       <div className={style.loading }>

@@ -26,14 +26,14 @@ export default function InitUser() {
       <InitUserSteps curstep={curstep} />
       {/* 连接钱包 */}
       {
-        curstep == 1 && <ConnectWallet onNext={() => {
+        curstep === 1 && <ConnectWallet onNext={() => {
           setCurstep(2);
         }}/>
       }
 
       {/* 个人简介 */}
       {
-        curstep == 2 && <Profile onNext={(obj) => {
+        curstep === 2 && <Profile onNext={(obj) => {
           console.log('ProfileObj', obj);
           setuserInfo({...obj});
           setCurstep(3);
@@ -42,7 +42,7 @@ export default function InitUser() {
 
       {/* Q&A */}
       {
-        curstep == 3 && <QuestionAndAnswer onNext={(obj) => {
+        curstep === 3 && <QuestionAndAnswer onNext={(obj) => {
           console.log('Q&A', obj);
           setuserInfo({ ...userInfo, 'qa': JSON.stringify(obj) });
           handleRegisterUser();
@@ -51,7 +51,7 @@ export default function InitUser() {
 
       {/* 填写完成 */}
       {
-        curstep == 4 && <ProfileDown/>
+        curstep === 4 && <ProfileDown/>
       }
     </div>
   )

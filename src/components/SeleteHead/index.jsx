@@ -24,7 +24,7 @@ export default function Index(props) {
                 }}>
                   <img className={styles.headerPicImg} layout="fill" src={`${item.img}`} alt='headerPic' />
                   {
-                    index == headerPicIndex && <div className={styles.tickWrap}>
+                    index === headerPicIndex && <div className={styles.tickWrap}>
                       <img src={tickPic} alt='tickPic'/>
                     </div>
                   }

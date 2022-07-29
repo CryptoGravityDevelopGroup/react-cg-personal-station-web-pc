@@ -35,7 +35,7 @@ export default function Index(props) {
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
-      if(response.code == 0) {
+      if(response.code === 0) {
         const temp = response.data.token.map(item => {
           return {
             img: item.logo
@@ -52,7 +52,7 @@ export default function Index(props) {
           <Row className={styles.userIamgeLine}>
             <Col span={5} className={styles.userImage}>
               <div className={styles.userImageWarp}>
-                <img className={styles.userImgContent} src={userPicIndex == null ? defaultUserPic : headerPicArr[userPicIndex].img} alt={'defaultUserPic'}/>
+                <img className={styles.userImgContent} src={userPicIndex === null ? defaultUserPic : headerPicArr[userPicIndex].img} alt={'defaultUserPic'}/>
               </div>
             </Col>
             <Col span={19} className={styles.userImageUploadBtn}>
