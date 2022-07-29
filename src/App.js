@@ -8,6 +8,7 @@ import Profile from "./modules/profile/index.tsx";
 import TokenDetail from "./modules/tokenDetail/index.tsx";
 
 function App() {
+  console.log('2.54')
   // 自适应
   useEffect(() => {
     window.onload = function () {
@@ -31,7 +32,7 @@ function App() {
         <Route path="/nftDetial" element={<NftDetail/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/tokenDetail" element={<TokenDetail/>}/>
-        <Route path="/*" element={<Navigate to="/main"/>}></Route>
+        <Route path="*" element={<Navigate to="/main"/>}></Route>
       </Routes>
     </BrowserRouter>
   );
