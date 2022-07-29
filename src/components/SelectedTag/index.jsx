@@ -31,7 +31,8 @@ export default function Index(props) {
   }
   useEffect(() => {
     onTagChange(newTagList);
-  },[newTagList, onTagChange])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[newTagList])
   return (
     <>
       <div className={styles.wrap}>
