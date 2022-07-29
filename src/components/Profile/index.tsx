@@ -30,20 +30,21 @@ export default function Index(props) {
     setIsModalVisible(true);
   };
   useEffect(() => {
-    getUserInfo({
-      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
-      "tokenType":"nft"
-    }).then((res) => {
-      const response = res.data;
-      if(response.code === 0) {
-        const temp = response.data.token.map(item => {
-          return {
-            img: item.logo
-          }
-        });
-        setHeaderPicArr(temp);
-      }
-    })
+    // 获取 NFT
+    // getUserInfo({
+    //   "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+    //   "tokenType":"nft"
+    // }).then((res) => {
+    //   const response = res.data;
+    //   if(response.code === 0) {
+    //     const temp = response.data.token.map(item => {
+    //       return {
+    //         img: item.logo
+    //       }
+    //     });
+    //     setHeaderPicArr(temp);
+    //   }
+    // });
   }, []);
   return (
     <>

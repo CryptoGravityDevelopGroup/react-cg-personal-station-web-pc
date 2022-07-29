@@ -24,6 +24,8 @@ import arrowDownPic from '../../static/arrow-down.png';
 
 export default function Index() {
   const navigate = useNavigate();
+  const [tokenList, setTokenList] = useState([]);
+  const [nftList, setNftList] = useState([]);
   const [QAList, setQAList] = useState([
     {
       status: false,
@@ -39,7 +41,7 @@ export default function Index() {
       answer: "To make your first listing,Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today.Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today."
     }
   ]);
-  const tokenList = [
+  const tokenListMock = [
     {
       tokenLogo: ethLogo,
       tokenName: 'Ethereum',
@@ -62,7 +64,7 @@ export default function Index() {
       tokenPrice:'$25,524.54'
     }
   ];
-  const headerPicArr = [
+  const nftListMock = [
     {
       img:demo1Pic,
       title: 'Community x Community x Community x',
@@ -94,12 +96,27 @@ export default function Index() {
     setQAList([...QAList]);
   }
   useEffect(() => {
+    // 获取NFT
     getUserInfo({
       "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
       "tokenType":"nft"
     }).then((res) => {
-      console.log('res', res);
-    })
+      const response = res.data;
+      if(response.code === 0) {
+        setNftList(response.data.token.slice(0, 6));
+      }
+    });
+    // 获取Token
+    getUserInfo({
+      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "tokenType":"token"
+    }).then((res) => {
+      const response = res.data;
+      if(response.code === 0) {
+        // setTokenList(response.data.token.slice(0,4));
+        setTokenList(tokenListMock);
+      }
+    });
   }, []);
   return (
     <div>
@@ -143,8 +160,8 @@ export default function Index() {
             Token
           </div>
           <div className={style.describeContent}>
-            <div>共持有12种token，共价值 $46,764.54</div>
-            <div>其中持有最多的是Ethereum 价值$56,345.43</div>
+            <div>共持有12种token，共价值 $？？？</div>
+            <div>其中持有最多的是Ethereum 价值$？？？</div>
           </div>
         </div>
         <div className={style.tokenList}>
@@ -190,7 +207,7 @@ export default function Index() {
         </div>
         <div className={style.nftList}>
           {
-            headerPicArr.map((item,index) => {
+            nftList.map((item,index) => {
               return (
                 <div className={style.nftItem} key={index}>
                   <div className={style.nftImage}>
