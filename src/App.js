@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from "react";
-import './App.css';
+// import './App.css';
 // import Main from "./modules/main/index.tsx";
 // import Inituser from "./modules/inituser/index.tsx";
 // import NftDetail from "./modules/nftDetail/index.tsx";
