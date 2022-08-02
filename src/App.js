@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/main" element={<Main/>}/>
         <Route path="/inituser" element={<Inituser/>}/>
-        <Route path="/nftDetial" element={<NftDetail/>}/>
+        <Route path="/nftDetail" element={<NftDetail/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/tokenDetail" element={<TokenDetail/>}/>
         <Route path="*" element={<Navigate to="/main"/>}></Route>

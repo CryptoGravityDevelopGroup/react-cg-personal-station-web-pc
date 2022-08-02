@@ -1,58 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
-import demo1Pic from '../../static/demo-1.png';
-import demo2Pic from '../../static/demo-2.png';
-import demo3Pic from '../../static/demo-3.png';
-import demo4Pic from '../../static/demo-4.png';
-import demo5Pic from '../../static/demo-5.png';
-import demo6Pic from '../../static/demo-6.png';
+import { getUserInfo } from '../../api/user';
 
 export default function Index() {
-  const headerPicArr = [
-    {
-      img:demo1Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo2Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo3Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo4Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo5Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo6Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo3Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo4Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo5Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    },{
-      img:demo6Pic,
-      title: 'Community x Community x Community x',
-      price: '2.45'
-    }
-  ]
+  const [nftList, setNftList] = useState([]);
+  useEffect(() => {
+    // 获取Token
+    getUserInfo({
+      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "tokenType":"nft"
+    }).then((res) => {
+      const response = res.data;
+      console.log('nft-response', response);
+      if(response.code === 0) {
+        setNftList(response.data.map((item) => {
+          return {
+            img: item.logo,
+            title: item.name,
+            price: item.balance / Math.pow(10,item.tokenDecimal),
+          }
+        }));
+      }
+    });
+  }, []);
   return (
     <div className={style.wrap}>
       <Header goHomeBtnStatus={true}/>
@@ -67,7 +39,7 @@ export default function Index() {
       </div>
       <div className={style.nftList}>
           {
-            headerPicArr.map((item,index) => {
+            nftList.map((item,index) => {
               return (
                 <div className={style.nftItem} key={index}>
                   <div className={style.nftImage}>

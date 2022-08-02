@@ -28,7 +28,7 @@ export function getStatus() {
 // 获取指定账号的token和NFT
 export function getUserInfo(data) {
   return request({
-    url: "/token/find",
+    url: "/token/list",
     method: "POST",
     data,
   });
