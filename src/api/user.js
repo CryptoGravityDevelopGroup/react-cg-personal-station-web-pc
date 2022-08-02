@@ -2,7 +2,7 @@ import request from "../utils/request";
 
 export function registerUser(data) {
   return request({
-    url: "/api/users/metamask/nonce",
+    url: "/users/metamask/nonce",
     method: "POST",
     data,
   });
@@ -11,7 +11,7 @@ export function registerUser(data) {
 export function login(data) {
   console.log("login", data);
   return request({
-    url: "/api/users/metamask/login",
+    url: "/users/metamask/login",
     method: "POST",
     data,
   });
@@ -20,7 +20,7 @@ export function login(data) {
 // 查看服务态
 export function getStatus() {
   return request({
-    url: "/api/ping/status",
+    url: "/ping/status",
     method: "GET",
   });
 }
@@ -28,7 +28,7 @@ export function getStatus() {
 // 获取指定账号的token和NFT
 export function getUserInfo(data) {
   return request({
-    url: "/api/token/find",
+    url: "/token/find",
     method: "POST",
     data,
   });

@@ -8,10 +8,6 @@ import userDefaultPic from '../../static/userDefaultPic.png'
 import instagramSolidPic from '../../static/instagram-solid.png';
 import telegramSolidPic from '../../static/telegram-solid.png';
 import twitterSolidPic from '../../static/twitter-solid.png';
-import bitLogo from '../../static/bit-logo.png';
-import ethLogo from '../../static/eth-logo.png';
-import usdtLogo from '../../static/usdt-logo.png';
-import rippleLogo from '../../static/ripple-logo.png';
 import moreBtn from '../../static/more-btn.png';
 // import demo1Pic from '../../static/demo-1.png';
 // import demo2Pic from '../../static/demo-2.png';
@@ -41,29 +37,6 @@ export default function Index() {
       answer: "To make your first listing,Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today.Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today."
     }
   ]);
-  const tokenListMock = [
-    {
-      tokenLogo: ethLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$85,814.75'
-    },{
-      tokenLogo: bitLogo,
-      tokenName: 'Bitcoin',
-      tokenNum: '40.08',
-      tokenPrice:'$59,080.46'
-    },{
-      tokenLogo: usdtLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$30,670.40'
-    },{
-      tokenLogo: rippleLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$25,524.54'
-    }
-  ];
   // const nftListMock = [
   //   {
   //     img:demo1Pic,
@@ -113,8 +86,14 @@ export default function Index() {
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        // setTokenList(response.data.token.slice(0,4));
-        setTokenList(tokenListMock);
+        setTokenList(response.data.token.slice(0,4).map((item) => {
+          return {
+            tokenLogo: item.logo,
+            tokenName: item.name,
+            tokenNum: item.balance / Math.pow(10,item.tokenDecimal),
+            tokenPrice:'TODO'
+          }
+        }));
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -183,7 +162,7 @@ export default function Index() {
             })
           }
           <div className={style.showMoreWrap}  onClick={() => {
-            navigate.push('/tokenDetail');
+            navigate('/tokenDetail');
           }}>
             <img width={24} height={24} src={moreBtn} alt="moreBtn" />
             <div className={style.showMoreContent}>show more</div>
@@ -200,7 +179,7 @@ export default function Index() {
             <div>最早2021年10月31日购买第一个nft，购买NFT共计花费24eth。其中xx、xx、xx项目的nft有着良好的市场表现</div>
           </div>
           <div className={style.nftShowMore} onClick={() => {
-            navigate.push('/nftDetail');
+            navigate('/nftDetail');
           }}>
             <div className={style.showMoreContent}>show more</div>
             <img width={18} height={18} src={moreBtn} alt="moreBtn" />

@@ -1,56 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Header from "../../components/Header/index.tsx";
-import bitLogo from '../../static/bit-logo.png';
-import ethLogo from '../../static/eth-logo.png';
-import usdtLogo from '../../static/usdt-logo.png';
-import rippleLogo from '../../static/ripple-logo.png';
 import style from './index.module.css';
+import { getUserInfo } from '../../api/user';
 
 export default function Index() {
-  const tokenList = [
-    {
-      tokenLogo: ethLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$85,814.75'
-    },{
-      tokenLogo: bitLogo,
-      tokenName: 'Bitcoin',
-      tokenNum: '40.08',
-      tokenPrice:'$59,080.46'
-    },{
-      tokenLogo: usdtLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$30,670.40'
-    },{
-      tokenLogo: rippleLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$25,524.54'
-    },{
-      tokenLogo: ethLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$85,814.75'
-    },{
-      tokenLogo: bitLogo,
-      tokenName: 'Bitcoin',
-      tokenNum: '40.08',
-      tokenPrice:'$59,080.46'
-    },{
-      tokenLogo: usdtLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$30,670.40'
-    },{
-      tokenLogo: rippleLogo,
-      tokenName: 'Ethereum',
-      tokenNum: '65.35',
-      tokenPrice:'$25,524.54'
-    }
-  ];
+  const [tokenList, setTokenList] = useState([]);
+  useEffect(() => {
+    // 获取Token
+    getUserInfo({
+      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "tokenType":"token"
+    }).then((res) => {
+      const response = res.data;
+      if(response.code === 0) {
+        setTokenList(response.data.token.map((item) => {
+          return {
+            tokenLogo: item.logo,
+            tokenName: item.name,
+            tokenNum: item.balance / Math.pow(10,item.tokenDecimal),
+            tokenPrice:'TODO'
+          }
+        }));
+      }
+    });
+  }, [])
+  
   return (
     <div className={style.wrap}>
       <Header goHomeBtnStatus={true}/>
@@ -59,8 +34,8 @@ export default function Index() {
           Token
         </div>
         <div className={style.detail}>
-          <div>共持有12种token，共价值 $46,764.54</div>
-          <div>其中持有最多的是Ethereum 价值$56,345.43</div>
+          <div>共持有12种token，共价值 $TODO</div>
+          <div>其中持有最多的是Ethereum 价值$TODO</div>
         </div>
       </div>
       <div className={style.tokenList}>

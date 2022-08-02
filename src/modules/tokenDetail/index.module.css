@@ -17,9 +17,10 @@
 }
 .tokenList {
   padding: 0 120rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* flex-wrap: wrap; */
+  /* justify-content: space-between; */
 }
 .tokenItem {
   width: 282rem;
@@ -30,12 +31,16 @@
   padding: 24rem 24rem;
   box-sizing: border-box;
   margin-bottom: 28rem;
+  /* margin-right: 12rem; */
 }
 .tokenLogo {
   width: 52rem;
   height: 52rem;
   border-radius: 42rem;
   margin-right: 24rem;
+}
+.tokenLogo img{
+  width: 100%;
 }
 .tokenName {
   font-size: 16px;
