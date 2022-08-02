@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
-import { getUserInfo } from '../../api/user';
+import { getTokenList } from '../../api/user';
 
 export default function Index() {
   const [tokenList, setTokenList] = useState([]);
   useEffect(() => {
     // 获取Token
-    getUserInfo({
+    getTokenList({
       "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
       "tokenType":"token"
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        setTokenList(response.data.token.map((item) => {
+        setTokenList(response.data.map((item) => {
           return {
             tokenLogo: item.logo,
             tokenName: item.name,

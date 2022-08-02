@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { Button, Form, Input, Row, Col } from 'antd';
 import SelectedHead from '../SeleteHead';
 import SelectedTag from '../SelectedTag';
-// import { getUserInfo } from '../../api/user';
+import { getNFTList } from '../../api/user';
 
 import "antd/dist/antd.css";
 import styles from './index.module.css';
@@ -17,7 +17,7 @@ export default function Index(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
   const [formdata, setFormdata] = useState({});
-  const [headerPicArr] = useState([])
+  const [headerPicArr, setHeaderPicArr] = useState([])
   const { TextArea } = Input;
   const handleHeadImgChange = (imgIndex) => {
     setIsModalVisible(false);
@@ -31,20 +31,21 @@ export default function Index(props) {
   };
   useEffect(() => {
     // 获取 NFT
-    // getUserInfo({
-    //   "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
-    //   "tokenType":"nft"
-    // }).then((res) => {
-    //   const response = res.data;
-    //   if(response.code === 0) {
-    //     const temp = response.data.token.map(item => {
-    //       return {
-    //         img: item.logo
-    //       }
-    //     });
-    //     setHeaderPicArr(temp);
-    //   }
-    // });
+    getNFTList({
+      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "tokenType":"nft"
+    }).then((res) => {
+      const response = res.data;
+      if(response.code === 0) {
+        const temp = response.data.token.map(item => {
+          return {
+            img: item.logo
+          }
+        });
+        console.log('temp', temp);
+        setHeaderPicArr(temp);
+      }
+    });
   }, []);
   return (
     <>

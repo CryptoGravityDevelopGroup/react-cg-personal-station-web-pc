@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
-import { getUserInfo } from '../../api/user';
+import { getTokenList } from '../../api/user';
 
 export default function Index() {
   const [nftList, setNftList] = useState([]);
   useEffect(() => {
     // 获取Token
-    getUserInfo({
+    getTokenList({
       "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
-      console.log('nft-response', response);
       if(response.code === 0) {
         setNftList(response.data.map((item) => {
           return {

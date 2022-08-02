@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
-import { getUserInfo } from '../../api/user';
+import { getTokenList, getUsersInfo } from '../../api/user';
+import { getCurAddress } from '../../utils/tool';
 import userDefaultPic from '../../static/userDefaultPic.png'
 import instagramSolidPic from '../../static/instagram-solid.png';
 import telegramSolidPic from '../../static/telegram-solid.png';
@@ -20,6 +21,8 @@ import arrowDownPic from '../../static/arrow-down.png';
 
 export default function Index() {
   const navigate = useNavigate();
+  const walletAddress = getCurAddress();
+  console.log('walletAddress', walletAddress);
   const [tokenList, setTokenList] = useState([]);
   const [nftList, setNftList] = useState([]);
   const [QAList, setQAList] = useState([
@@ -69,24 +72,38 @@ export default function Index() {
     setQAList([...QAList]);
   }
   useEffect(() => {
+    // 获取个人信息
+    getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
+      console.log('getUserInfo', res);
+    })
     // 获取NFT
-    getUserInfo({
+    getTokenList({
       "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        setNftList(response.data.token.slice(0, 6));
+        let tempArr =response.data.map((item) => {
+          return {
+            img: item.logo,
+            title: item.name,
+            price: item.price,
+            isValid: item.isValid
+          }
+        });
+        console.log('tempArr', tempArr);
+        tempArr = tempArr.filter((item) => item.isValid === 1);
+        setNftList(tempArr.slice(0, 6));
       }
     });
     // 获取Token
-    getUserInfo({
+    getTokenList({
       "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
       "tokenType":"token"
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        setTokenList(response.data.token.slice(0,4).map((item) => {
+        setTokenList(response.data.slice(0,4).map((item) => {
           return {
             tokenLogo: item.logo,
             tokenName: item.name,

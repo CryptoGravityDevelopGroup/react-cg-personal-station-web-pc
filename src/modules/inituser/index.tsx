@@ -7,7 +7,7 @@ import QuestionAndAnswer from "../../components/QuestionAndAnswer/index.tsx";
 import ProfileDown from "../../components/ProfileDown/index.tsx";
 import style from './index.module.css';
 import { registerUser } from '../../api/user';
-import { getCurAddress } from '../../utils/tool'
+import { getCurAddress } from '../../utils/tool';
 export default function InitUser() {
   const [curstep, setCurstep] = useState(2);
   const [userInfo, setuserInfo] = useState({});

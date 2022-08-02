@@ -26,10 +26,31 @@ export function getStatus() {
 }
 
 // 获取指定账号的token和NFT
-export function getUserInfo(data) {
+export function getNFTList(data) {
+  return request({
+    url: "/token/find",
+    method: "POST",
+    data,
+  });
+}
+
+// 获取指定账号的token和NFT
+export function getTokenList(data) {
   return request({
     url: "/token/list",
     method: "POST",
     data,
+  });
+}
+
+// 查看服务态
+export function getUsersInfo({nickName,walletAddress}) {
+  return request({
+    url: "/users/info",
+    method: "GET",
+    params: {
+      walletAddress: walletAddress,
+      nickName: nickName
+    }
   });
 }
