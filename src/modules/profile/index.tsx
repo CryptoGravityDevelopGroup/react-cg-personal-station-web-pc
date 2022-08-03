@@ -22,9 +22,11 @@ import arrowDownPic from '../../static/arrow-down.png';
 export default function Index() {
   const navigate = useNavigate();
   const walletAddress = getCurAddress();
-  console.log('walletAddress', walletAddress);
   const [tokenList, setTokenList] = useState([]);
+  const [allTokenVal, setAllTokenVal] = useState(0);
+  const [maxTokenVal, setMaxTokenVal] = useState(0);
   const [nftList, setNftList] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [QAList, setQAList] = useState([
     {
       status: false,
@@ -71,10 +73,17 @@ export default function Index() {
     QAList[index].status = !QAList[index].status;
     setQAList([...QAList]);
   }
+  const handleUrlClick = (url) => {
+    window.open(url);
+  }
   useEffect(() => {
     // 获取个人信息
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
       console.log('getUserInfo', res);
+      const response = res.data;
+      if(response.code === 0) {
+        setUserInfo(response.data);
+      }
     })
     // 获取NFT
     getTokenList({
@@ -91,7 +100,6 @@ export default function Index() {
             isValid: item.isValid
           }
         });
-        console.log('tempArr', tempArr);
         tempArr = tempArr.filter((item) => item.isValid === 1);
         setNftList(tempArr.slice(0, 6));
       }
@@ -103,51 +111,69 @@ export default function Index() {
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        setTokenList(response.data.slice(0,4).map((item) => {
+        setTokenList(response.data.map((item) => {
           return {
             tokenLogo: item.logo,
             tokenName: item.name,
             tokenNum: item.balance / Math.pow(10,item.tokenDecimal),
-            tokenPrice:'TODO'
+            tokenPrice: item.balance / Math.pow(10,item.tokenDecimal)*item.price
           }
         }));
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    let tempAllTokenVal = 0, tempMaxTokenVal  = 0;
+    tokenList.forEach(item => {
+      tempAllTokenVal = tempAllTokenVal + item.tokenPrice;
+      if (item.tokenPrice > tempMaxTokenVal) {
+        tempMaxTokenVal = item.tokenPrice;
+      } 
+    })
+    setAllTokenVal(tempAllTokenVal);
+    setMaxTokenVal(tempMaxTokenVal);
+  }, [tokenList])
+  
   return (
     <div>
       <Header upmStatus={true} />
       <div className={style.profileWrap}>
         <div className={style.userHeadPic}>
-          <img src={userDefaultPic} alt='userDefaultPic' />
+          <img src={userInfo.avatar} alt='userDefaultPic' />
         </div>
         <div className={style.userName}>
-          leo zeng
+          {userInfo.nickname}
         </div>
         <div className={style.tagWrap}>
-          <div className={style.tagItem}>
-            Reporter
-          </div>
-          <div className={style.tagItem}>
-            Blogger
-          </div>
-          <div className={style.tagItem}>
-            Server
-          </div>
+          {
+            userInfo.tags && userInfo.tags.map((item) => {
+              return (
+                <div className={style.tagItem}>
+                  {item}
+                </div>
+              )
+            })
+          }
         </div>
         <div className={style.introduce}>
-          <span>Otherdeed is the key to claiming land in Otherside. Each have a unique blend of environment and sediment — some with resources, some home to powerful artifacts. And on a very few, a Koda roams.</span>
+          <span>{userInfo.brief}</span>
         </div>
         <div className={style.leftSliderList}>
             <div className={style.leftSliderItem}>
-              <img width={20} height={20} src={instagramSolidPic} alt="instagramSolidPic" />
+              <img width={20} height={20} src={instagramSolidPic} alt="instagramSolidPic" onClick={() => {
+                handleUrlClick(userInfo.instagramId);
+              }}/>
             </div>
             <div className={style.leftSliderItem}>
-              <img width={20} height={20} src={telegramSolidPic} alt="telegramSolidPic" />
+              <img width={20} height={20} src={telegramSolidPic} alt="telegramSolidPic" onClick={() => {
+                handleUrlClick(userInfo.telegramId);
+              }}/>
             </div>
             <div className={style.leftSliderItem}>
-              <img width={20} height={20} src={twitterSolidPic} alt="twitterSolidPic" />
+              <img width={20} height={20} src={twitterSolidPic} alt="twitterSolidPic" onClick={() => {
+                handleUrlClick(userInfo.twitterId);
+              }}/>
             </div>
           </div>
       </div>
@@ -157,13 +183,13 @@ export default function Index() {
             Token
           </div>
           <div className={style.describeContent}>
-            <div>共持有12种token，共价值 $？？？</div>
-            <div>其中持有最多的是Ethereum 价值$？？？</div>
+            <div>共持有{tokenList.length}种token，共价值 ${allTokenVal}</div>
+            <div>其中持有最多的是Ethereum 价值${maxTokenVal}</div>
           </div>
         </div>
         <div className={style.tokenList}>
           {
-            tokenList.map((item, index) => {
+            tokenList.slice(0,4).map((item, index) => {
               return (
                 <div className={style.tokenItem} key={index}>
                   <div className={style.tokenLogo}>
@@ -172,7 +198,7 @@ export default function Index() {
                   <div className={style.tokenInfo}>
                     <div className={style.tokenName}>{item.tokenName}</div>
                     <div className={style.tokenNum}>{item.tokenNum}</div>
-                    <div className={style.tokenPrice}>{item.tokenPrice}</div>
+                    <div className={style.tokenPrice}>${item.tokenPrice}</div>
                   </div>
                 </div>
               )
