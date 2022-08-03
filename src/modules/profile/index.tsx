@@ -27,21 +27,7 @@ export default function Index() {
   const [maxTokenVal, setMaxTokenVal] = useState(0);
   const [nftList, setNftList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
-  const [QAList, setQAList] = useState([
-    {
-      status: false,
-      question: 'What is graphic design?',
-      answer: "To make your first listing,Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today.Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today."
-    },{
-      status: false,
-      question: 'Accessibility and inclusion',
-      answer: "To make your first listing,Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today.Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today."
-    },{
-      status: false,
-      question: 'How to connect wallet',
-      answer: "To make your first listing,Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today.Design is all around us. It's more than making things pretty. Learn more about what design is and the role it plays in our world today."
-    }
-  ]);
+  const [QAList, setQAList] = useState([]);
   // const nftListMock = [
   //   {
   //     img:demo1Pic,
@@ -81,7 +67,16 @@ export default function Index() {
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
       const response = res.data;
       if(response.code === 0) {
+        response.data.tag = JSON.parse(response.data.tag);
+        response.data.qa = JSON.parse(response.data.qa).map((item) => {
+          return {
+            status: false,
+            question: item.question,
+            answer: item.answer
+          }
+        });
         setUserInfo(response.data);
+        setQAList(response.data.qa);
       }
     })
     // 获取NFT

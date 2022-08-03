@@ -14,7 +14,6 @@ export default function InitUser() {
   let userInfo = {};
   const handleRegisterUser = () => {
     const address = getCurAddress();
-    console.log('address', address);
     const params = { ...userInfo, "ethAddress": address };
     params.tags = JSON.stringify(params.tags); 
     params.qa = JSON.stringify(params.qa); 
