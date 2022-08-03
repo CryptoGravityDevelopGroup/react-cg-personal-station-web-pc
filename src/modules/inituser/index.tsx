@@ -10,12 +10,14 @@ import { registerUser } from '../../api/user';
 import { getCurAddress } from '../../utils/tool';
 export default function InitUser() {
   const [curstep, setCurstep] = useState(2);
-  const [userInfo, setuserInfo] = useState({});
+  // const [userInfo, setuserInfo] = useState({});
+  let userInfo = {};
   const handleRegisterUser = () => {
     const address = getCurAddress();
     console.log('address', address);
     const params = { ...userInfo, "ethAddress": address };
     params.tags = JSON.stringify(params.tags); 
+    params.qa = JSON.stringify(params.qa); 
     registerUser(params).then(() => {
       setCurstep(4);
     })
@@ -35,7 +37,7 @@ export default function InitUser() {
       {
         curstep === 2 && <Profile onNext={(obj) => {
           console.log('ProfileObj', obj);
-          setuserInfo({...obj});
+          userInfo = {...obj};
           setCurstep(3);
         }}/>
       }
@@ -44,7 +46,7 @@ export default function InitUser() {
       {
         curstep === 3 && <QuestionAndAnswer onNext={(obj) => {
           console.log('Q&A', obj);
-          setuserInfo({ ...userInfo, 'qa': JSON.stringify(obj) });
+          userInfo = { ...userInfo, 'qa': obj };
           handleRegisterUser();
         }}/>
       }

@@ -79,7 +79,6 @@ export default function Index() {
   useEffect(() => {
     // 获取个人信息
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
-      console.log('getUserInfo', res);
       const response = res.data;
       if(response.code === 0) {
         setUserInfo(response.data);
