@@ -214,27 +214,27 @@
   width: 100%;
 }
 .nftInfo {
-  padding: 8px 12px 12px 12px;
-  border-radius: 16px;
+  padding: 8rem 12rem 12rem 12rem;
+  border-radius: 16rem;
   background: #ffffff;
   position: absolute;
   top: 128rem;
 }
 .nftTitle {
-  width: 120px;
-  height: 24px;
-  font-size: 12px;
+  width: 120rem;
+  height: 24rem;
+  font-size: 12rem;
   font-weight: bold;
   color: #22262e;
-  line-height: 18px;
+  line-height: 18rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .nftPrice {
-  font-size: 12px;
+  font-size: 12rem;
   font-weight: normal;
-  line-height: 17px;
+  line-height: 17rem;
   color: #45b26b;
 }
 .QAWrap {

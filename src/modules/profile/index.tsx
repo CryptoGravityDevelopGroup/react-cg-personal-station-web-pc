@@ -67,7 +67,8 @@ export default function Index() {
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        response.data.tag = JSON.parse(response.data.tag);
+        console.log('response', response);
+        response.data.tags = JSON.parse(response.data.tags);
         response.data.qa = JSON.parse(response.data.qa).map((item) => {
           return {
             status: false,

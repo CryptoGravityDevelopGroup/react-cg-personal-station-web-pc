@@ -8,10 +8,10 @@ import ProfileDown from "../../components/ProfileDown/index.tsx";
 import style from './index.module.css';
 import { registerUser } from '../../api/user';
 import { getCurAddress } from '../../utils/tool';
+let userInfo = {};
 export default function InitUser() {
   const [curstep, setCurstep] = useState(2);
   // const [userInfo, setuserInfo] = useState({});
-  let userInfo = {};
   const handleRegisterUser = () => {
     const address = getCurAddress();
     const params = { ...userInfo, "ethAddress": address };
@@ -35,8 +35,9 @@ export default function InitUser() {
       {/* 个人简介 */}
       {
         curstep === 2 && <Profile onNext={(obj) => {
-          console.log('ProfileObj', obj);
-          userInfo = {...obj};
+          
+          userInfo = { ...obj };
+          console.log(222, userInfo);
           setCurstep(3);
         }}/>
       }
@@ -44,7 +45,6 @@ export default function InitUser() {
       {/* Q&A */}
       {
         curstep === 3 && <QuestionAndAnswer onNext={(obj) => {
-          console.log('Q&A', obj);
           userInfo = { ...userInfo, 'qa': obj };
           handleRegisterUser();
         }}/>
