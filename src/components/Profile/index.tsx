@@ -42,7 +42,6 @@ export default function Index(props) {
             img: item.logo
           }
         });
-        console.log('temp', temp);
         setHeaderPicArr(temp);
       }
     });

@@ -64,3 +64,11 @@ export function checkoutNickName(nickName) {
     }
   });
 }
+// 编辑用户
+export function upDateUsers(data) {
+  return request({
+    url: "/users/update",
+    method: "POST",
+    data,
+  });
+}

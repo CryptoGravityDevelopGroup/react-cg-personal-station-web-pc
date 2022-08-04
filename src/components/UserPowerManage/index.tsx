@@ -76,6 +76,9 @@ export default function Index() {
       <Modal visible={isProfileModalVisible} title='编辑个人资料' onOk={() => {
         handleProfileModalOk();
       }}>
+        {/* <Profile onNext={(obj) => {
+          userInfo = { ...obj };
+        }}/> */}
       </Modal>
       <Modal visible={isQAModalVisible} title='编辑 Q&A' onOk={() => {
         handleQAModalOk();
