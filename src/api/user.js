@@ -72,3 +72,12 @@ export function upDateUsers(data) {
     data,
   });
 }
+
+// 编辑问题
+export function upDateQuestion(data) {
+  return request({
+    url: "/users/question",
+    method: "POST",
+    data,
+  });
+}

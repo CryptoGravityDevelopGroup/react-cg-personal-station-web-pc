@@ -48,3 +48,29 @@
   box-sizing: border-box;
   overflow-x: hidden;
 }
+
+/* 个人信息表单 */
+.content {
+  width: 538rem;
+  margin: 24px auto;
+}
+.userIamgeLine {
+  margin-bottom: 30px;
+}
+.userImage {
+  display: flex;
+  align-items: center;
+}
+.userImageWarp {
+  width: 52rem;
+  height: 52rem;
+  border-radius: 28rem;
+  overflow: hidden;
+}
+.userImgContent {
+  height: 100%;
+}
+.userImageUploadBtn {
+  display: flex;
+  align-items: center;
+}

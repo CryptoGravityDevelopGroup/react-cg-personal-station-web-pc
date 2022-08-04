@@ -3,13 +3,15 @@ import React, { useState, useEffect } from 'react';
 import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
 import { getTokenList } from '../../api/user';
+import { getCurAddress } from '../../utils/tool';
 
 export default function Index() {
   const [tokenList, setTokenList] = useState([]);
+  const walletAddress = getCurAddress();
   useEffect(() => {
     // 获取Token
     getTokenList({
-      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "ethAddress": walletAddress,
       "tokenType":"token"
     }).then((res) => {
       const response = res.data;

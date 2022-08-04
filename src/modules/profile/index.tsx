@@ -69,20 +69,25 @@ export default function Index() {
       if(response.code === 0) {
         console.log('response', response);
         response.data.tags = JSON.parse(response.data.tags);
-        response.data.qa = JSON.parse(response.data.qa).map((item) => {
-          return {
-            status: false,
-            question: item.question,
-            answer: item.answer
-          }
-        });
+        console.log('response.data.qa', response.data.qa);
+        let qaArr = [];
+        if(response.data.qa.length > 0 ){
+          qaArr = JSON.parse(response.data.qa);
+          qaArr = qaArr.map((item) => {
+            return {
+              status: false,
+              question: item.question,
+              answer: item.answer
+            }
+          });
+        }
         setUserInfo(response.data);
-        setQAList(response.data.qa);
+        setQAList(qaArr);
       }
     })
     // 获取NFT
     getTokenList({
-      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "ethAddress": walletAddress,
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
@@ -101,7 +106,7 @@ export default function Index() {
     });
     // 获取Token
     getTokenList({
-      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "ethAddress":walletAddress,
       "tokenType":"token"
     }).then((res) => {
       const response = res.data;

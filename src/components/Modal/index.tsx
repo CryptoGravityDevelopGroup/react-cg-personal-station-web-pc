@@ -15,6 +15,9 @@ export default function Index(props) {
       {
         visible && (
           <>
+            <div className={styles.modalMask} onClick={() => {
+              handleOk();
+            }}></div>
             <div className={styles.modal}>
               <div className={styles.modalTitleWrap}>
                 <span className={styles.title}>{title}</span>
@@ -31,9 +34,6 @@ export default function Index(props) {
                 }}>Ok</div>
               </div>
             </div>
-            <div className={styles.modalMask} onClick={() => {
-              handleOk();
-            }}></div>
           </>
         )
       }

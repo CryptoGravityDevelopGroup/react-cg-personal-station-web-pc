@@ -3,6 +3,7 @@ import { Button, Form, Input, Row, Col } from 'antd';
 import SelectedHead from '../SeleteHead';
 import SelectedTag from '../SelectedTag';
 import { getNFTList, checkoutNickName } from '../../api/user';
+import { getCurAddress } from '../../utils/tool';
 
 import "antd/dist/antd.css";
 import styles from './index.module.css';
@@ -14,6 +15,7 @@ import defaultUserPic from '@/static/default_user.png';
 
 export default function Index(props) {
   const { onNext } = props;
+  const walletAddress = getCurAddress();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
   const [formdata, setFormdata] = useState({});
@@ -32,7 +34,7 @@ export default function Index(props) {
   useEffect(() => {
     // 获取 NFT
     getNFTList({
-      "ethAddress":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "ethAddress": walletAddress,
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;

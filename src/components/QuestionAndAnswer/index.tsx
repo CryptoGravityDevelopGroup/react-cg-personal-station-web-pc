@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 
 import style from './index.module.css';
@@ -6,7 +6,7 @@ import deleteBtnPic from '../../static/delete-btn.png'
 import addBtnPic from '../../static/add-btn.png'
 
 export default function Index(props) {
-  const { onNext, isShowDoneBtn } = props;
+  const { onNext, isShowDoneBtn, callBackFun } = props;
   const { TextArea } = Input;
   const [questionList, setQuestionList] = useState([{
     question:'',
@@ -23,6 +23,9 @@ export default function Index(props) {
     })
     setQuestionList([...questionList]);
   }
+  useEffect(() => {
+    callBackFun && callBackFun(questionList);
+  },[questionList]);
   return (
     <>
       <div className={style.wrap}>
