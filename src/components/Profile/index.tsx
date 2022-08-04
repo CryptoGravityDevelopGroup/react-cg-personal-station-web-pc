@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { Button, Form, Input, Row, Col } from 'antd';
 import SelectedHead from '../SeleteHead';
 import SelectedTag from '../SelectedTag';
-import { getNFTList } from '../../api/user';
+import { getNFTList, checkoutNickName } from '../../api/user';
 
 import "antd/dist/antd.css";
 import styles from './index.module.css';
@@ -76,8 +76,25 @@ export default function Index(props) {
             <Form.Item
               label="name"
               name="name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your name!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    checkoutNickName(value).then((res) => {
+                      if(res.success === true) {
+                        return Promise.resolve();
+                      } else {
+                        return Promise.reject(new Error('nickname duplicate!'));
+                      }
+                    }); 
+                  }
+                })
+              ]}
             >
-              <Input placeholder='Enter your name' onChange={ (event) => {
+              <Input placeholder='Enter your name' onChange={(event) => {
                 setFormdata({...formdata, ...{ nickname: event.target.value }});
               }} />
             </Form.Item>
@@ -103,6 +120,12 @@ export default function Index(props) {
             <Form.Item
               label="Instagram"
               name="Instagram"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Instagram!',
+                }
+              ]}
             >
               <Input placeholder="Enter your Instagram id" onChange={(event) => {
                 setFormdata({...formdata, ...{ instagramId: event.target.value }});
@@ -111,6 +134,12 @@ export default function Index(props) {
             <Form.Item
               label="Twitter"
               name="Twitter"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Twitter!',
+                }
+              ]}
             >
               <Input placeholder="Enter your Twitter id" onChange={(event) => {
                 setFormdata({...formdata, ...{ twitterId: event.target.value }});
@@ -119,6 +148,12 @@ export default function Index(props) {
             <Form.Item
               label="Telegram"
               name="Telegram"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your telegram!',
+                }
+              ]}
             >
               <Input placeholder="Enter your telegram id" onChange={(event) => {
                 setFormdata({...formdata, ...{ telegramId: event.target.value }});
@@ -127,6 +162,15 @@ export default function Index(props) {
             <Form.Item
               label="Email"
               name="Email"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your email!',
+                },{
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                }
+              ]}
             >
               <Input placeholder="Enter your Email" onChange={(event) => {
                 setFormdata({...formdata, ...{ email: event.target.value }});

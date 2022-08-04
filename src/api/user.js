@@ -54,3 +54,13 @@ export function getUsersInfo({nickName,walletAddress}) {
     }
   });
 }
+// 查询昵称是否重复
+export function checkoutNickName(nickName) {
+  return request({
+    url: "/users/exist",
+    method: "GET",
+    params: {
+      nickName: nickName
+    }
+  });
+}
