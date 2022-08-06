@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from './index.module.css';
 import Modal from '../Modal/index.tsx';
 import tickPic from '../../static/tick.png';
+import nullImg from '../../static/null_img.png'
 
 export default function Index(props) {
   const { headerPicArr, isModalVisible, handleOk } = props;
@@ -17,7 +18,7 @@ export default function Index(props) {
       }}>
         <div className={styles.headerPicWrap}>
           {
-            headerPicArr.map((item, index) => {
+            headerPicArr.length > 0 && headerPicArr.map((item, index) => {
               return (
                 <div key={index} className={styles.headerPicItem} onClick={() => {
                   handleHeaderPicClick(index);
@@ -28,9 +29,16 @@ export default function Index(props) {
                       <img src={tickPic} alt='tickPic'/>
                     </div>
                   }
-                </div>
+                </div> 
               )
             })
+          }
+          {
+            headerPicArr.length === 0 && (
+              <div className={styles.headerPicItem}>
+                <img className={styles.headerPicImg} layout="fill" src={nullImg} alt='headerPic' />
+              </div>  
+            )
           }
         </div>
       </Modal>

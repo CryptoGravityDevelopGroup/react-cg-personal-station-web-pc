@@ -62,7 +62,7 @@ const Main = function () {
       <div className={style.content}>
         <div className={style.leftModule}>
           <div className={style.title}>CryptoGravity</div>
-          <div className={style.subTitle}>Building the next-generation intelligent <br/>application cloud service platform</div>
+          <div className={style.subTitle}>Create your web3 identity main station</div>
           <div className={style.startBtn} onClick={() => {
             handleStartClick()
           }}>
