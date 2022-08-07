@@ -48,6 +48,7 @@ export default function Index() {
   }, [menuListStatus]);
 
   const editProfile = () => {
+    console.log('editProfile');
     setIsProfileModalVisible(true);
     setMenuListStatus(false);
   }
@@ -200,12 +201,6 @@ export default function Index() {
               <Form.Item
                 label="Instagram"
                 name="Instagram"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your Instagram!',
-                  }
-                ]}
               >
                 <Input placeholder="Enter your Instagram id" onChange={(event) => {
                   setFormdata({...formdata, ...{ instagramId: event.target.value }});
@@ -214,12 +209,6 @@ export default function Index() {
               <Form.Item
                 label="Twitter"
                 name="Twitter"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your Twitter!',
-                  }
-                ]}
               >
                 <Input placeholder="Enter your Twitter id" onChange={(event) => {
                   setFormdata({...formdata, ...{ twitterId: event.target.value }});
@@ -228,40 +217,17 @@ export default function Index() {
               <Form.Item
                 label="Telegram"
                 name="Telegram"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your telegram!',
-                  }
-                ]}
               >
                 <Input placeholder="Enter your telegram id" onChange={(event) => {
                   setFormdata({...formdata, ...{ telegramId: event.target.value }});
                 }} suffix={<img src={telegramPic} alt="telegramPic"/>} />
               </Form.Item>
-              <Form.Item
-                label="Email"
-                name="Email"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your email!',
-                  },{
-                    type: 'email',
-                    message: 'The input is not valid E-mail!',
-                  }
-                ]}
-              >
-                <Input placeholder="Enter your Email" onChange={(event) => {
-                  setFormdata({...formdata, ...{ email: event.target.value }});
-                }} suffix={<img src={telegramPic} alt="email"/>} />
-              </Form.Item>
             </Form>
           </div>
         </div>
-        {/* 选择头像 */}
-        <SelectedHead headerPicArr={headerPicArr} isModalVisible={isModalVisible} handleOk={handleHeadImgChange}/>
       </Modal>
+      {/* 选择头像 */}
+      <SelectedHead headerPicArr={headerPicArr} isModalVisible={isModalVisible} handleOk={handleHeadImgChange}/>
       <Modal visible={isQAModalVisible} title='编辑 Q&A' onOk={() => {
         handleQAModalOk();
       }}>

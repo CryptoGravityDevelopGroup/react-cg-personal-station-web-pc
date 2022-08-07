@@ -5,11 +5,14 @@ import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
 import { getTokenList, getUsersInfo } from '../../api/user';
 import { getCurAddress } from '../../utils/tool';
-import userDefaultPic from '../../static/userDefaultPic.png'
+import defaultUser from '../../static/default_user.png'
 import instagramSolidPic from '../../static/instagram-solid.png';
 import telegramSolidPic from '../../static/telegram-solid.png';
 import twitterSolidPic from '../../static/twitter-solid.png';
 import moreBtn from '../../static/more-btn.png';
+import noToken from '../../static/no-token.png';
+import noNft from '../../static/no-nft.png';
+import noQa from '../../static/no-qa.png';
 // import demo1Pic from '../../static/demo-1.png';
 // import demo2Pic from '../../static/demo-2.png';
 // import demo3Pic from '../../static/demo-3.png';
@@ -28,33 +31,6 @@ export default function Index() {
   const [nftList, setNftList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [QAList, setQAList] = useState([]);
-  // const nftListMock = [
-  //   {
-  //     img:demo1Pic,
-  //     title: 'Community x Community x Community x',
-  //     price: '2.45'
-  //   },{
-  //     img:demo2Pic,
-  //     title: 'Community x Community x Community x',
-  //     price: '2.45'
-  //   },{
-  //     img:demo3Pic,
-  //     title: 'Community x Community x Community x',
-  //     price: '2.45'
-  //   },{
-  //     img:demo4Pic,
-  //     title: 'Community x Community x Community x',
-  //     price: '2.45'
-  //   },{
-  //     img:demo5Pic,
-  //     title: 'Community x Community x Community x',
-  //     price: '2.45'
-  //   },{
-  //     img:demo6Pic,
-  //     title: 'Community x Community x Community x',
-  //     price: '2.45'
-  //   }
-  // ]
   const handleQuestionClick = (index) =>{
     QAList[index].status = !QAList[index].status;
     setQAList([...QAList]);
@@ -81,6 +57,7 @@ export default function Index() {
             }
           });
         }
+        response.data.avatar = response.data.avatar || defaultUser;
         setUserInfo(response.data);
         setQAList(qaArr);
       }
@@ -136,7 +113,7 @@ export default function Index() {
   }, [tokenList])
   
   return (
-    <div>
+    <div className={style.contentWrap}>
       <Header upmStatus={true} />
       <div className={style.profileWrap}>
         <div className={style.userHeadPic}>
@@ -182,109 +159,155 @@ export default function Index() {
           <div className={style.profileTitle}>
             Token
           </div>
-          <div className={style.describeContent}>
-            <div>共持有{tokenList.length}种token，共价值 ${allTokenVal}</div>
-            <div>其中持有最多的是Ethereum 价值${maxTokenVal}</div>
-          </div>
-        </div>
-        <div className={style.tokenList}>
           {
-            tokenList.slice(0,4).map((item, index) => {
-              return (
-                <div className={style.tokenItem} key={index}>
-                  <div className={style.tokenLogo}>
-                    <img src={item.tokenLogo} alt='tokenLogo' />
-                  </div>
-                  <div className={style.tokenInfo}>
-                    <div className={style.tokenName}>{item.tokenName}</div>
-                    <div className={style.tokenNum}>{item.tokenNum}</div>
-                    <div className={style.tokenPrice}>${item.tokenPrice}</div>
-                  </div>
-                </div>
-              )
-            })
+            tokenList.length !== 0 && (
+              <div className={style.describeContent}>
+                <div>共持有{tokenList.length}种token，共价值 ${allTokenVal}</div>
+                <div>其中持有最多的是Ethereum 价值${maxTokenVal}</div>
+              </div>
+            )
           }
-          <div className={style.showMoreWrap}  onClick={() => {
-            navigate('/tokenDetail');
-          }}>
-            <img width={24} height={24} src={moreBtn} alt="moreBtn" />
-            <div className={style.showMoreContent}>show more</div>
-          </div>
         </div>
+        <div>
+          {
+            tokenList.length !== 0 && (<div className={style.tokenList}>
+              {
+                tokenList.slice(0,4).map((item, index) => {
+                  return (
+                    <div className={style.tokenItem} key={index}>
+                      <div className={style.tokenLogo}>
+                        <img src={item.tokenLogo} alt='tokenLogo' />
+                      </div>
+                      <div className={style.tokenInfo}>
+                        <div className={style.tokenName}>{item.tokenName}</div>
+                        <div className={style.tokenNum}>{item.tokenNum}</div>
+                        <div className={style.tokenPrice}>${item.tokenPrice}</div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+              <div className={style.showMoreWrap}  onClick={() => {
+                navigate('/tokenDetail');
+              }}>
+                <img width={24} height={24} src={moreBtn} alt="moreBtn" />
+                <div className={style.showMoreContent}>show more</div>
+              </div>
+            </div>)
+          }
+        </div>
+        {
+          tokenList.length === 0 && (
+            <div className={style.noData}>
+              <img className={style.noDataImg} src={noToken} alt="noTokens" />
+              <div className={style.noDataTips}>no Token</div>
+            </div>
+          )
+        }
       </div>
       <div className={style.nftWrap}>
         <div className={style.nftDescribe}>
           <div className={style.nftPlateTitle}>
             NFT
           </div>
-          <div className={style.nftDescribeContent}>
-            <div>共持有120个NFT，来自于24个不同项目</div>
-            <div>最早2021年10月31日购买第一个nft，购买NFT共计花费24eth。其中xx、xx、xx项目的nft有着良好的市场表现</div>
-          </div>
-          <div className={style.nftShowMore} onClick={() => {
-            navigate('/nftDetail');
-          }}>
-            <div className={style.showMoreContent}>show more</div>
-            <img width={18} height={18} src={moreBtn} alt="moreBtn" />
-          </div>
-        </div>
-        <div className={style.nftList}>
           {
-            nftList.map((item,index) => {
-              return (
-                <div className={style.nftItem} key={index}>
-                  <div className={style.nftImage}>
-                    <img src={item.img} alt="NFTImage"/>
-                  </div>
-                  <div className={style.nftInfo}>
-                    <div className={style.nftTitle}>{item.title}</div>
-                    <div className={style.nftPrice}>{item.price} ETH</div>
-                  </div>
+            nftList.length !== 0 && (
+              <>
+                <div className={style.nftDescribeContent}>
+                  <div>共持有{nftList.length}个NFT，来自于24个不同项目</div>
+                  <div>最早2021年10月31日购买第一个nft，购买NFT共计花费24eth。其中xx、xx、xx项目的nft有着良好的市场表现</div>
                 </div>
-              )
-            })
+                <div className={style.nftShowMore} onClick={() => {
+                  navigate('/nftDetail');
+                }}>
+                  <div className={style.showMoreContent}>show more</div>
+                  <img width={18} height={18} src={moreBtn} alt="moreBtn" />
+                </div>
+              </>
+            )
           }
         </div>
+        {
+          nftList.length !== 0 && (
+            <div className={style.nftList}>
+              {
+                nftList.map((item,index) => {
+                  return (
+                    <div className={style.nftItem} key={index}>
+                      <div className={style.nftImage}>
+                        <img src={item.img} alt="NFTImage"/>
+                      </div>
+                      <div className={style.nftInfo}>
+                        <div className={style.nftTitle}>{item.title}</div>
+                        <div className={style.nftPrice}>{item.price} ETH</div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          )
+        }
       </div>
+      {
+        nftList.length === 0 && (
+          <div className={style.noData}>
+            <img className={style.noDataImg} src={noNft} alt="noNft" />
+            <div className={style.noDataTips}>no NFT</div>
+          </div>
+        )
+      }
       <div className={style.QAWrap}>
         <div className={style.QADescribe}>
           <div className={style.QATitle}>
             Q&A
           </div>
         </div>
-        <div className={style.QAList}>
-          {
-            QAList.map((item, index) => {
-              return (
-                <div className={style.QAItem} key={index}>
-                  <div className={style.question}>
-                    <div>{item.question}</div>
+        {
+          QAList.length !== 0 && (
+          <div className={style.QAList}>
+            {
+              QAList.map((item, index) => {
+                return (
+                  <div className={style.QAItem} key={index}>
+                    <div className={style.question}>
+                      <div>{item.question}</div>
+                      {
+                        item.status ? (
+                          <div className={style.arrow} onClick={() => {
+                            handleQuestionClick(index);
+                          }}>
+                            <img src={arrowUpPic} alt='arrowUpPic'/>
+                          </div>
+                        ) : (
+                          <div className={style.arrow} onClick={() => {
+                            handleQuestionClick(index);
+                          }}>
+                            <img src={arrowDownPic} alt='arrowDownPic'/>
+                          </div>
+                        )
+                      }
+                    </div>
                     {
                       item.status ? (
-                        <div className={style.arrow} onClick={() => {
-                          handleQuestionClick(index);
-                        }}>
-                          <img src={arrowUpPic} alt='arrowUpPic'/>
-                        </div>
-                      ) : (
-                        <div className={style.arrow} onClick={() => {
-                          handleQuestionClick(index);
-                        }}>
-                          <img src={arrowDownPic} alt='arrowDownPic'/>
-                        </div>
-                      )
+                        <div className={style.answer}>{item.answer}</div>
+                      ) : ''
                     }
                   </div>
-                  {
-                    item.status ? (
-                      <div className={style.answer}>{item.answer}</div>
-                    ) : ''
-                  }
-                </div>
-              )
-            })
-          }
-        </div>
+                )
+              })
+            }
+          </div>
+        )
+        }
+        {
+          QAList.length === 0 && (
+            <div className={style.noData}>
+              <img className={style.noDataImg} src={noQa} alt="noQa" />
+              <div className={style.noDataTips}>no NFT</div>
+            </div>
+          )
+        }
       </div>
     </div>
   )

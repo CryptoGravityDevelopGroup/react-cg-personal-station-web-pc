@@ -1,3 +1,6 @@
+.contentWrap {
+  padding-bottom: 120px;
+}
 .profileWrap {
   position: relative;
   display: flex;
@@ -24,6 +27,7 @@
 }
 .tagWrap {
   display: flex;
+  margin-bottom: 12px;
 }
 .tagItem {
   padding: 2px 8px;
@@ -274,4 +278,23 @@
   padding: 30rem 0;
   border-top: 1px solid #f1f1f1;
   border-bottom: 1px solid #f1f1f1;
+}
+
+.noData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 280rem;
+}
+.noDataImg {
+  width: 130rem;
+}
+
+.noDataTips {
+  font-size: 14px;
+  font-weight: normal;
+  color: #454C66;
+  line-height: 20px;
+  margin-top: 16px;
 }

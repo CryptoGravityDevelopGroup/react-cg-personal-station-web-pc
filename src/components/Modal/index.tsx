@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './index.module.css';
@@ -10,6 +10,20 @@ export default function Index(props) {
   const handleOk = () => {
     onOk && onOk();
   };
+  useEffect(() => {
+    console.log('visible', visible);
+    let bodyDOM = document.getElementsByTagName('body')[0];
+    let modalList = document.getElementById('modalDialog');
+    console.log('visible', bodyDOM.style.overflow);
+    console.log('modalList', modalList);
+    if(visible) {
+      bodyDOM.style.overflow = 'hidden';
+    }
+    if(!visible && modalList === null) {
+      bodyDOM.style.overflow = 'auto';
+    }
+  }, [visible])
+  
   const modalTemplate =  (
     <>
       {
@@ -18,7 +32,7 @@ export default function Index(props) {
             <div className={styles.modalMask} onClick={() => {
               handleOk();
             }}></div>
-            <div className={styles.modal}>
+            <div id="modalDialog" className={styles.modal}>
               <div className={styles.modalTitleWrap}>
                 <span className={styles.title}>{title}</span>
                 <img className={styles.modalClose} src={closePic} alt="close" onClick={() => {
