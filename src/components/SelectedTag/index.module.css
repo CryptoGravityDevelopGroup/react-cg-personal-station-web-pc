@@ -78,7 +78,7 @@ input[type="text"]:focus.addTagInput {
   height: 1px;
   border-radius: 1px;
   background: #e6e8ec;
-  margin: 32px 0;
+  margin: 32px 0 0;
 }
 .tagsTitle {
   font-size: 14px;
@@ -102,4 +102,10 @@ input[type="text"]:focus.addTagInput {
   margin-bottom: 16px;
   color: #454c66;
   cursor: pointer;
+}
+.overLenTips {
+  margin: 10px 0 32px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 1.5715;
 }

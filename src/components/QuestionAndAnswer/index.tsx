@@ -41,13 +41,13 @@ export default function Index(props) {
                 <div className={style.title}>
                   question {index + 1}
                 </div>
-                <Input style={{marginBottom: '24px',}} onChange={(event) => {
+                <Input showCount maxLength={100} style={{marginBottom: '24px',}} onChange={(event) => {
                   item.question = event.target.value;
                 }}/>
                 <div className={style.title}>
                   answer
                 </div>
-                <TextArea placeholder="Enter your Answer" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
+                <TextArea className={style.answerContent} showCount maxLength={500}  placeholder="Enter your Answer" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
                   item.answer = event.target.value;
                 }} />
               </div>

@@ -9,7 +9,8 @@ export default function Index(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTagList, setNewTagList] = useState([]);
   const tagInputRed = useRef();
-  const recommendTagList = ['canarylarruped','sketchburkitt','drearilyscone','sticksmeat','snoopplow','platinumoffice','pinslunch','pointersnutmeg','blockedlunation'];
+  // const recommendTagList = ['canarylarruped','sketchburkitt','drearilyscone','sticksmeat','snoopplow','platinumoffice','pinslunch','pointersnutmeg','blockedlunation'];
+  const recommendTagList = ['Investor', 'NFT collector', 'web3 investor', 'dao founder', 'entrepreneur', 'leek', 'lost 100 million', 'crypto practitioner', 'all in web3'];
   const addNewTag = (value) => {
     if(newTagList.length + 1 <= 3) {
       newTagList.push(value);
@@ -80,6 +81,9 @@ export default function Index(props) {
               <span>{newTagList.length} / 3</span>
             </div>
             <div className={styles.line}></div>
+            <div className={styles.overLenTips}>{
+              newTagList.length === 3 && 'Up to 3 tags can be entered'
+            }</div>
             <div className={styles.tagRecommendWrap}>
               <div className={styles.tagsTitle}>推荐</div>
               <div className={styles.tagsContent}>

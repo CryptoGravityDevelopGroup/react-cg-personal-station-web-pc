@@ -77,10 +77,11 @@ export default function Index(props) {
             <Form.Item
               label="name"
               name="name"
+              extra="If you have purchased an ens domain name, we recommend using an ens domain name."
               rules={[
                 {
                   required: true,
-                  message: 'Please input your name!',
+                  message: 'Please enter your name',
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
@@ -114,19 +115,13 @@ export default function Index(props) {
               label="about me"
               name="about me"
             >
-              <TextArea placeholder="Enter your Info" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
+              <TextArea showCount maxLength={300} placeholder="Enter your Info" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
                 setFormdata({...formdata, ...{ brief: event.target.value }});
               }} />
             </Form.Item>
             <Form.Item
               label="Instagram"
               name="Instagram"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Instagram!',
-                }
-              ]}
             >
               <Input placeholder="Enter your Instagram id" onChange={(event) => {
                 setFormdata({...formdata, ...{ instagramId: event.target.value }});
@@ -135,12 +130,6 @@ export default function Index(props) {
             <Form.Item
               label="Twitter"
               name="Twitter"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Twitter!',
-                }
-              ]}
             >
               <Input placeholder="Enter your Twitter id" onChange={(event) => {
                 setFormdata({...formdata, ...{ twitterId: event.target.value }});
@@ -149,25 +138,16 @@ export default function Index(props) {
             <Form.Item
               label="Telegram"
               name="Telegram"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your telegram!',
-                }
-              ]}
             >
               <Input placeholder="Enter your telegram id" onChange={(event) => {
                 setFormdata({...formdata, ...{ telegramId: event.target.value }});
               }} suffix={<img src={telegramPic} alt="telegramPic"/>} />
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               label="Email"
               name="Email"
               rules={[
                 {
-                  required: true,
-                  message: 'Please input your email!',
-                },{
                   type: 'email',
                   message: 'The input is not valid E-mail!',
                 }
@@ -176,7 +156,7 @@ export default function Index(props) {
               <Input placeholder="Enter your Email" onChange={(event) => {
                 setFormdata({...formdata, ...{ email: event.target.value }});
               }} suffix={<img src={telegramPic} alt="email"/>} />
-            </Form.Item>
+            </Form.Item> */}
           </Form>
           <div className={styles.fromBottom}>
             <div className={'button'} onClick={() => {
