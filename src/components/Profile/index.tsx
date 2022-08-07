@@ -14,7 +14,7 @@ import instagramPic from '@/static/instagram.png';
 import defaultUserPic from '@/static/default_user.png';
 
 export default function Index(props) {
-  const { onNext } = props;
+  const { profileDataChange, initFormData } = props;
   const walletAddress = getCurAddress();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
@@ -48,6 +48,10 @@ export default function Index(props) {
       }
     });
   }, []);
+  useEffect(() => {
+    profileDataChange(formdata);
+  }, [formdata])
+  
   return (
     <>
       <div className={styles.wrap}>
@@ -73,6 +77,13 @@ export default function Index(props) {
             autoComplete="off"
             labelAlign="left"
             size="large"
+            initialValues={{
+              name: initFormData.nickname,
+              aboutMe: initFormData.brief,
+              Instagram: initFormData.instagramId,
+              Twitter: initFormData.twitterId,
+              Telegram: initFormData.telegramId,
+            }}
           >
             <Form.Item
               label="name"
@@ -96,7 +107,7 @@ export default function Index(props) {
                 })
               ]}
             >
-              <Input placeholder='Enter your name' onChange={(event) => {
+              <Input placeholder='Enter your name' defaultValue={formdata.nickname} onChange={(event) => {
                 setFormdata({...formdata, ...{ nickname: event.target.value }});
               }} />
             </Form.Item>
@@ -106,14 +117,14 @@ export default function Index(props) {
             >
               {/* 选择tag */}
               <div style={{height: '40.1px'}}>
-                <SelectedTag onTagChange={(tagsVal) => {
+                <SelectedTag initTagList={[...initFormData.tags]} onTagChange={(tagsVal) => {
                   setFormdata({...formdata, ...{ tags: tagsVal }});
                 }}/>
               </div>
             </Form.Item>
             <Form.Item
               label="about me"
-              name="about me"
+              name="aboutMe"
             >
               <TextArea showCount maxLength={300} placeholder="Enter your Info" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
                 setFormdata({...formdata, ...{ brief: event.target.value }});
@@ -158,12 +169,6 @@ export default function Index(props) {
               }} suffix={<img src={telegramPic} alt="email"/>} />
             </Form.Item> */}
           </Form>
-          <div className={styles.fromBottom}>
-            <div className={'button'} onClick={() => {
-              console.log('formdata', formdata);
-              onNext(formdata);
-            }}>Next</div>
-          </div>
         </div>
       </div>
       {/* 选择头像 */}

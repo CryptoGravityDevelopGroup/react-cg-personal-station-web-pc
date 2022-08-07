@@ -5,11 +5,10 @@ import styles from './index.module.css';
 import addTagPic from '../../static/add-tag.png';
 import deleteTagPic from '../../static/delete-tag.png';
 export default function Index(props) {
-  const { onTagChange } = props;
+  const { onTagChange, initTagList } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [newTagList, setNewTagList] = useState([]);
+  const [newTagList, setNewTagList] = useState([...initTagList]);
   const tagInputRed = useRef();
-  // const recommendTagList = ['canarylarruped','sketchburkitt','drearilyscone','sticksmeat','snoopplow','platinumoffice','pinslunch','pointersnutmeg','blockedlunation'];
   const recommendTagList = ['Investor', 'NFT collector', 'web3 investor', 'dao founder', 'entrepreneur', 'leek', 'lost 100 million', 'crypto practitioner', 'all in web3'];
   const addNewTag = (value) => {
     if(newTagList.length + 1 <= 3) {

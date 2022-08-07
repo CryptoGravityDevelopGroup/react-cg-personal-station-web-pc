@@ -34,12 +34,21 @@ export default function InitUser() {
 
       {/* 个人简介 */}
       {
-        curstep === 2 && <Profile onNext={(obj) => {
-          
-          userInfo = { ...obj };
-          console.log(222, userInfo);
-          setCurstep(3);
-        }}/>
+        curstep === 2 &&(
+          <>
+            <Profile initFormData = {{
+              tags: []
+            }} profileDataChange={(obj) => {
+              console.log('obj', obj);
+              userInfo = { ...obj };
+            }}/>
+            <div className={style.fromBottom}>
+              <div className={'button'} onClick={() => {
+                setCurstep(3);
+              }}>Next</div>
+            </div>
+          </>
+        )
       }
 
       {/* Q&A */}

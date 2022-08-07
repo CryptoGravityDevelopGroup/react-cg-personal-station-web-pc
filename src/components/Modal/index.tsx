@@ -11,11 +11,8 @@ export default function Index(props) {
     onOk && onOk();
   };
   useEffect(() => {
-    console.log('visible', visible);
     let bodyDOM = document.getElementsByTagName('body')[0];
     let modalList = document.getElementById('modalDialog');
-    console.log('visible', bodyDOM.style.overflow);
-    console.log('modalList', modalList);
     if(visible) {
       bodyDOM.style.overflow = 'hidden';
     }

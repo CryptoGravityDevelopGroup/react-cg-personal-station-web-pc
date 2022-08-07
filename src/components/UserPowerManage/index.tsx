@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Button, Form, Input, Row, Col } from 'antd';
-import SelectedHead from '../SeleteHead';
-import SelectedTag from '../SelectedTag';
+
 import Modal from '../Modal/index.tsx';
 import QuestionAndAnswer from "../QuestionAndAnswer/index.tsx";
-import { getTokenList, checkoutNickName, upDateUsers, upDateQuestion } from '../../api/user';
+import { getTokenList, upDateUsers, upDateQuestion, getUsersInfo } from '../../api/user';
 import { getCurAddress } from '../../utils/tool';
+import Profile from "../../components/Profile/index.tsx";
 
 import upmBtnPic from '../../static/upm-btn.png';
 import logoutPic from '../../static/logout.png';
@@ -13,29 +12,17 @@ import questionPic from '../../static/question.png';
 import userProfilePic from '../../static/user-profile.png';
 
 import styles from './index.module.css';
-import twitterPic from '@/static/twitter.png';
-import telegramPic from '@/static/telegram.png';
-import instagramPic from '@/static/instagram.png';
-import defaultUserPic from '@/static/default_user.png';
 export default function Index() {
   let qaList = {};
   const walletAddress = getCurAddress();
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [menuListStatus, setMenuListStatus] = useState(false);
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
   const [isQAModalVisible, setIsQAModalVisible] = useState(false);
-  const [userPicIndex, setUserPicIndex] = useState(null);
-  const [formdata, setFormdata] = useState({});
-  const [headerPicArr, setHeaderPicArr] = useState([])
+  const [formdata, setFormdata] = useState({
+    qa:[]
+  });
   const menuList = useRef();
-  const { TextArea } = Input;
-  const handleHeadImgChange = (imgIndex) => {
-    setIsModalVisible(false);
-    if (imgIndex != null) {
-      setUserPicIndex(imgIndex);
-      setFormdata({...formdata, ...{ avatar:  headerPicArr[imgIndex].img}});
-    }
-  };
+ 
   useEffect(() => {
     if(menuListStatus) {
       (document.getElementsByTagName('body')[0]).addEventListener('click', (event) => {
@@ -48,7 +35,6 @@ export default function Index() {
   }, [menuListStatus]);
 
   const editProfile = () => {
-    console.log('editProfile');
     setIsProfileModalVisible(true);
     setMenuListStatus(false);
   }
@@ -73,9 +59,6 @@ export default function Index() {
     })
     setIsQAModalVisible(false);
   };
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
   useEffect(() => {
     // 获取 NFT
     getTokenList({
@@ -92,6 +75,15 @@ export default function Index() {
         setHeaderPicArr(temp);
       }
     });
+    // 获取个人信息
+    getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
+      const response = res.data;
+      if(response.code === 0) {
+        response.data.qa = JSON.parse(response.data.qa);
+        console.log('response.data--response.data', response.data.qa);
+        setFormdata(response.data);
+      }
+    })
   }, []);
   return (
     <>
@@ -132,107 +124,18 @@ export default function Index() {
       }}>
         <div className={styles.useInfoForm}>
           <div className={styles.content}>
-            <Row className={styles.userIamgeLine}>
-              <Col span={5} className={styles.userImage}>
-                <div className={styles.userImageWarp}>
-                  <img className={styles.userImgContent} src={userPicIndex === null ? defaultUserPic : headerPicArr[userPicIndex].img} alt={'defaultUserPic'}/>
-                </div>
-              </Col>
-              <Col span={19} className={styles.userImageUploadBtn}>
-                <Button type="primary" ghost size='large' shape='round' onClick={() => {
-                  showModal();
-                }}>
-                  修改头像
-                </Button>
-              </Col>
-            </Row>
-            <Form
-              name="useInfo"
-              labelCol={{ span: 5 }}
-              wrapperCol={{ span: 19 }}
-              autoComplete="off"
-              labelAlign="left"
-              size="large"
-            >
-              <Form.Item
-                label="name"
-                name="name"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your name!',
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      checkoutNickName(value).then((res) => {
-                        if(res.success === true) {
-                          return Promise.resolve();
-                        } else {
-                          return Promise.reject(new Error('nickname duplicate!'));
-                        }
-                      }); 
-                    }
-                  })
-                ]}
-              >
-                <Input placeholder='Enter your name' onChange={(event) => {
-                  setFormdata({...formdata, ...{ nickname: event.target.value }});
-                }} />
-              </Form.Item>
-              <Form.Item
-                label="tag"
-                name="tag"
-              >
-                {/* 选择tag */}
-                <div style={{height: '40.1px'}}>
-                  <SelectedTag onTagChange={(tagsVal) => {
-                    setFormdata({...formdata, ...{ tags: tagsVal }});
-                  }}/>
-                </div>
-              </Form.Item>
-              <Form.Item
-                label="about me"
-                name="about me"
-              >
-                <TextArea placeholder="Enter your Info" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
-                  setFormdata({...formdata, ...{ brief: event.target.value }});
-                }} />
-              </Form.Item>
-              <Form.Item
-                label="Instagram"
-                name="Instagram"
-              >
-                <Input placeholder="Enter your Instagram id" onChange={(event) => {
-                  setFormdata({...formdata, ...{ instagramId: event.target.value }});
-                }} suffix={<img src={instagramPic} alt="instagramPic"/>}/>
-              </Form.Item>
-              <Form.Item
-                label="Twitter"
-                name="Twitter"
-              >
-                <Input placeholder="Enter your Twitter id" onChange={(event) => {
-                  setFormdata({...formdata, ...{ twitterId: event.target.value }});
-                }} suffix={<img src={twitterPic} alt="twitterPic"/>}/>
-              </Form.Item>
-              <Form.Item
-                label="Telegram"
-                name="Telegram"
-              >
-                <Input placeholder="Enter your telegram id" onChange={(event) => {
-                  setFormdata({...formdata, ...{ telegramId: event.target.value }});
-                }} suffix={<img src={telegramPic} alt="telegramPic"/>} />
-              </Form.Item>
-            </Form>
+            <Profile initFormData={formdata} profileDataChange={(obj) => {
+              // userInfo = { ...obj };
+              setFormdata({ ...obj });
+            }}/>
           </div>
         </div>
       </Modal>
-      {/* 选择头像 */}
-      <SelectedHead headerPicArr={headerPicArr} isModalVisible={isModalVisible} handleOk={handleHeadImgChange}/>
       <Modal visible={isQAModalVisible} title='编辑 Q&A' onOk={() => {
         handleQAModalOk();
       }}>
         <div className={styles.aqModalContentWarp}>
-          <QuestionAndAnswer isShowDoneBtn={false} callBackFun={(obj) => {
+          <QuestionAndAnswer initQaList={[...formdata.qa]} isShowDoneBtn={false} callBackFun={(obj) => {
             qaList = { 'qa': obj };
           }}/>
         </div>

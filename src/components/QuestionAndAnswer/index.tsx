@@ -6,12 +6,9 @@ import deleteBtnPic from '../../static/delete-btn.png'
 import addBtnPic from '../../static/add-btn.png'
 
 export default function Index(props) {
-  const { onNext, isShowDoneBtn, callBackFun } = props;
+  const { onNext, isShowDoneBtn, callBackFun, initQaList } = props;
   const { TextArea } = Input;
-  const [questionList, setQuestionList] = useState([{
-    question:'',
-    answer:''
-  }]);
+  const [questionList, setQuestionList] = useState([...initQaList]);
   const deleteQuestion = (index) => {
     questionList.splice(index,1);
     setQuestionList([...questionList]);
@@ -41,13 +38,13 @@ export default function Index(props) {
                 <div className={style.title}>
                   question {index + 1}
                 </div>
-                <Input showCount maxLength={100} style={{marginBottom: '24px',}} onChange={(event) => {
+                <Input value={item.question} showCount maxLength={100} style={{marginBottom: '24px',}} onChange={(event) => {
                   item.question = event.target.value;
                 }}/>
                 <div className={style.title}>
                   answer
                 </div>
-                <TextArea className={style.answerContent} showCount maxLength={500}  placeholder="Enter your Answer" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
+                <TextArea value={item.answer} className={style.answerContent} showCount maxLength={500}  placeholder="Enter your Answer" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
                   item.answer = event.target.value;
                 }} />
               </div>
