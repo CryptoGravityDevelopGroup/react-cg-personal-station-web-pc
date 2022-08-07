@@ -19,6 +19,7 @@ export default function Index() {
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
   const [isQAModalVisible, setIsQAModalVisible] = useState(false);
   const [formdata, setFormdata] = useState({
+    tags:[1,2,3],
     qa:[]
   });
   const menuList = useRef();
@@ -80,7 +81,8 @@ export default function Index() {
       const response = res.data;
       if(response.code === 0) {
         response.data.qa = JSON.parse(response.data.qa);
-        console.log('response.data--response.data', response.data.qa);
+        response.data.tags = JSON.parse(response.data.tags);
+        console.log('response.data--response.data', response.data);
         setFormdata(response.data);
       }
     })
@@ -135,7 +137,10 @@ export default function Index() {
         handleQAModalOk();
       }}>
         <div className={styles.aqModalContentWarp}>
-          <QuestionAndAnswer initQaList={[...formdata.qa]} isShowDoneBtn={false} callBackFun={(obj) => {
+          <QuestionAndAnswer initQaList={[{
+            question: 'ad',
+            answer: 'as'
+          }]} isShowDoneBtn={false} callBackFun={(obj) => {
             qaList = { 'qa': obj };
           }}/>
         </div>

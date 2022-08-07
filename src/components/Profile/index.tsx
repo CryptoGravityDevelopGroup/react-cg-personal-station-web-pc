@@ -15,11 +15,13 @@ import defaultUserPic from '@/static/default_user.png';
 
 export default function Index(props) {
   const { profileDataChange, initFormData } = props;
+  console.log('-----', initFormData);
   const walletAddress = getCurAddress();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
   const [formdata, setFormdata] = useState({});
-  const [headerPicArr, setHeaderPicArr] = useState([])
+  const [headerPicArr, setHeaderPicArr] = useState([]);
+  const [nftNameList, setNftNameList] = useState([]);
   const { TextArea } = Input;
   const handleHeadImgChange = (imgIndex) => {
     setIsModalVisible(false);
@@ -38,19 +40,27 @@ export default function Index(props) {
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
+      console.log('***', response.data);
       if(response.code === 0) {
+        let tempNftName = [];
         const temp = response.data.token.map(item => {
           return {
             img: item.logo
           }
         });
         setHeaderPicArr(temp);
+        response.data.token.forEach(item => {
+          if(item.contractAddress === "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85") {
+            tempNftName.push(item.name);
+          }
+        });
+        setNftNameList(tempNftName);
       }
     });
   }, []);
-  useEffect(() => {
-    profileDataChange(formdata);
-  }, [formdata])
+  // useEffect(() => {
+  //   profileDataChange(formdata);
+  // }, [formdata])
   
   return (
     <>
@@ -66,7 +76,7 @@ export default function Index(props) {
               <Button type="primary" ghost size='large' shape='round' onClick={() => {
                 showModal();
               }}>
-                修改头像
+                Modify Avatar
               </Button>
             </Col>
           </Row>
@@ -98,11 +108,21 @@ export default function Index(props) {
                   validator(_, value) {
                     checkoutNickName(value).then((res) => {
                       if(res.success === true) {
+                        console.log(1);
                         return Promise.resolve();
                       } else {
+                        console.log(2);
                         return Promise.reject(new Error('nickname duplicate!'));
                       }
-                    }); 
+                    });
+                    if(value.indexOf('.eth') !== -1){
+                      if(nftNameList.includes(value) === false) {
+                        return Promise.reject(new Error(`You havn't the domain name ${value}`));
+                      }
+                    }
+                    if(value.indexOf('.') !== -1 && value.indexOf('.eth') === -1){
+                      return Promise.reject(new Error(`"Nicknames in ${value} format cannot be used`));
+                    }
                   }
                 })
               ]}

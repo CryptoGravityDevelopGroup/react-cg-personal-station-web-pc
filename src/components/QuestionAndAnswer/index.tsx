@@ -8,7 +8,17 @@ import addBtnPic from '../../static/add-btn.png'
 export default function Index(props) {
   const { onNext, isShowDoneBtn, callBackFun, initQaList } = props;
   const { TextArea } = Input;
-  const [questionList, setQuestionList] = useState([...initQaList]);
+  const [questionList, setQuestionList] = useState(() => {
+    if(initQaList && initQaList.lenght > 0) {
+      return [...initQaList];
+    }
+    return [
+      {
+        question: '',
+        answer:''
+      }
+    ]
+  });
   const deleteQuestion = (index) => {
     questionList.splice(index,1);
     setQuestionList([...questionList]);

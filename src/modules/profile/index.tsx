@@ -52,14 +52,9 @@ export default function Index() {
           qaArr = qaArr.map((item) => {
             return {
               status: false,
-              question: 'item.question',
-              answer: 'item.answer'
+              question: item.question,
+              answer: item.answer
             }
-            // return {
-            //   status: false,
-            //   question: item.question,
-            //   answer: item.answer
-            // }
           });
         }
         response.data.avatar = response.data.avatar || defaultUser;
