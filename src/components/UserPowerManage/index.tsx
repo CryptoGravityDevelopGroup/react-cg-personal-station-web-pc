@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-
 import Modal from '../Modal/index.tsx';
 import QuestionAndAnswer from "../QuestionAndAnswer/index.tsx";
 import { getTokenList, upDateUsers, upDateQuestion, getUsersInfo } from '../../api/user';
-import { getCurAddress } from '../../utils/tool';
+import { getCurAddress, logout } from '../../utils/tool';
 import Profile from "../../components/Profile/index.tsx";
 
 import upmBtnPic from '../../static/upm-btn.png';
@@ -64,6 +63,9 @@ export default function Index() {
     })
     setIsQAModalVisible(false);
   };
+  const handleLogout = () => {
+    logout();
+  }
   useEffect(() => {
     // 获取 NFT
     getTokenList({
@@ -117,7 +119,9 @@ export default function Index() {
               </div>
               <span className={styles.itemName}>编辑 Q&A</span>
             </div>
-            <div className={styles.menuItem}>
+            <div className={styles.menuItem} onClick={() => {
+              handleLogout();
+            }}>
               <div className={styles.itemIcon}>
                 <img src={logoutPic}  alt="logoutPic"/>
               </div>
