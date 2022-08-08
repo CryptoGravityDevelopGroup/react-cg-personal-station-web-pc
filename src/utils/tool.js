@@ -50,5 +50,5 @@ export function handleSignMessage(publicAddress, nonce) {
 export function logout() {
   localStorage.clear('ethNonce');
   localStorage.clear('ethAddress');
-  window.location.href('/main');
+  window.location.href='/main';
 }

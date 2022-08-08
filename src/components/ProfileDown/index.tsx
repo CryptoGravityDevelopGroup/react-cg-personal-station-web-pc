@@ -10,11 +10,11 @@ export default function Index() {
         <div className={style.successPicWrap}>
           <img src={successPic} alt='successPic' />
         </div>
-        <div className={style.title}>创建完成</div>
-        <div className={style.tips}>恭喜你已成功创建自己的web3身份主页</div>
+        <div className={style.title}>Created</div>
+        <div className={style.tips}>Congratulations you have successfully created your web3 identity home page</div>
         <div className={'button'} onClick={() => {
           navigate('/profile');
-        }}>进入主页</div>
+        }}>Go to the home page</div>
     </div>
   )
 }

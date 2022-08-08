@@ -109,7 +109,7 @@ export default function Index() {
               <div className={styles.itemIcon}>
                 <img src={userProfilePic}  alt="userProfilePic"/>
               </div>
-              <span className={styles.itemName}>编辑个人资料</span>
+              <span className={styles.itemName}>Edit profile</span>
             </div>
             <div className={styles.menuItem} onClick={() => {
               editQA();
@@ -117,7 +117,7 @@ export default function Index() {
               <div className={styles.itemIcon}>
                 <img src={questionPic}  alt="questionPic"/>
               </div>
-              <span className={styles.itemName}>编辑 Q&A</span>
+              <span className={styles.itemName}>Edit Q&A</span>
             </div>
             <div className={styles.menuItem} onClick={() => {
               handleLogout();
@@ -125,12 +125,12 @@ export default function Index() {
               <div className={styles.itemIcon}>
                 <img src={logoutPic}  alt="logoutPic"/>
               </div>
-              <span className={styles.itemName}>退出</span>
+              <span className={styles.itemName}>Quit</span>
             </div>
           </div>
         }
       </div>
-      <Modal visible={isProfileModalVisible} title='编辑个人资料' onOk={() => {
+      <Modal visible={isProfileModalVisible} title='Edit profile' onOk={() => {
         handleProfileModalOk();
       }}>
         <div className={styles.useInfoForm}>
@@ -142,7 +142,7 @@ export default function Index() {
           </div>
         </div>
       </Modal>
-      <Modal visible={isQAModalVisible} title='编辑 Q&A' onOk={() => {
+      <Modal visible={isQAModalVisible} title='Edit Q&A' onOk={() => {
         handleQAModalOk();
       }}>
         <div className={styles.aqModalContentWarp}>
