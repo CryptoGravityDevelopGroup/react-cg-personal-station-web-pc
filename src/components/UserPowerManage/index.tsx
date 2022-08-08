@@ -19,7 +19,11 @@ export default function Index() {
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
   const [isQAModalVisible, setIsQAModalVisible] = useState(false);
   const [formdata, setFormdata] = useState({
-    tags:[1,2,3],
+    tags:[],
+    qa:[]
+  });
+  const [initFormData, setInitFormData] = useState({
+    tags:[],
     qa:[]
   });
   const menuList = useRef();
@@ -82,7 +86,8 @@ export default function Index() {
       if(response.code === 0) {
         response.data.qa = JSON.parse(response.data.qa);
         response.data.tags = JSON.parse(response.data.tags);
-        console.log('response.data--response.data', response.data);
+        console.log('initFormData', initFormData);
+        setInitFormData(JSON.parse(JSON.stringify(response.data)))
         setFormdata(response.data);
       }
     })
@@ -126,7 +131,7 @@ export default function Index() {
       }}>
         <div className={styles.useInfoForm}>
           <div className={styles.content}>
-            <Profile initFormData={formdata} profileDataChange={(obj) => {
+            <Profile initFormData={initFormData} profileDataChange={(obj) => {
               // userInfo = { ...obj };
               setFormdata({ ...obj });
             }}/>
@@ -137,10 +142,7 @@ export default function Index() {
         handleQAModalOk();
       }}>
         <div className={styles.aqModalContentWarp}>
-          <QuestionAndAnswer initQaList={[{
-            question: 'ad',
-            answer: 'as'
-          }]} isShowDoneBtn={false} callBackFun={(obj) => {
+          <QuestionAndAnswer initQaList={initFormData.qa} isShowDoneBtn={false} callBackFun={(obj) => {
             qaList = { 'qa': obj };
           }}/>
         </div>

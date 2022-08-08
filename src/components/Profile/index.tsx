@@ -58,9 +58,9 @@ export default function Index(props) {
       }
     });
   }, []);
-  // useEffect(() => {
-  //   profileDataChange(formdata);
-  // }, [formdata])
+  useEffect(() => {
+    profileDataChange(formdata);
+  }, [formdata])
   
   return (
     <>
