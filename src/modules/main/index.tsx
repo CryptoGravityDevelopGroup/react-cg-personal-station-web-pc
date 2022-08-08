@@ -4,6 +4,7 @@ import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
 import { useNavigate } from "react-router-dom";
 import startPic from '../../static/startPic.png';
+// import mainLogo from '../../static/main-logo.png';
 import { connectWallte, handleSignMessage } from '../../utils/tool';
 import { login, registerUser } from '../../api/user';
 
@@ -70,6 +71,9 @@ const Main = function () {
             <img src={startPic} alt="startPic"/>
           </div>
         </div>
+        {/* <div className={style.rightModule}>
+          <img src={mainLogo} alt="" />
+        </div> */}
       </div>
     </div>
   )

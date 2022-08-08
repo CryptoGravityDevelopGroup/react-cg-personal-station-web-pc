@@ -10,6 +10,12 @@
   flex-direction: column;
   justify-content: center;
   width: 1200rem;
+  background-image: url('../../static/main-logo.png');
+  background-repeat: no-repeat;
+	background-attachment:fixed;
+	background-position: 65% 0px;
+  background-size: auto 100%;
+  
 }
 .title {
   font-size: 48px;
