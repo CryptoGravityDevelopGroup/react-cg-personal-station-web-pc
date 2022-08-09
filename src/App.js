@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from "react";
 import './App.css';
 import Main from "./modules/main/index.tsx";
@@ -25,7 +25,7 @@ function App() {
     }
   }, []);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/main" element={<Main/>}/>
         <Route path="/inituser" element={<Inituser/>}/>
@@ -34,7 +34,7 @@ function App() {
         <Route path="/tokenDetail" element={<TokenDetail/>}/>
         <Route path="*" element={<Navigate to="/main"/>}></Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

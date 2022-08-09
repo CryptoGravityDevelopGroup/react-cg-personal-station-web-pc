@@ -71,11 +71,13 @@
 }
 .tokenDescribe {
   height: 144px;
-  padding: 0 56px;
-  display: flex;
-  align-items: center;
+  /* padding: 0 56px; */
+  position: relative;
 }
 .profileTitle {
+  top: 28rem;
+  left: 56rem;
+  position: absolute;
   font-size: 36px;
   font-weight: normal;
   line-height: 45px;
@@ -152,14 +154,19 @@
   align-content: center;
 }
 .nftDescribe {
-  width: 350rem;
+  /* width: 350rem; */
+  height: 100rem;
+  position: relative;
 }
 .nftPlateTitle {
+  top: 28rem;
+  left: 56rem;
+  position: absolute;
   font-size: 36px;
   font-weight: normal;
   line-height: 45px;
   color: #2d2f35;
-  padding: 0 0 54rem 53rem;
+  /* padding: 0 0 54rem 53rem; */
 }
 .nftDescribeContent {
   font-size: 16rem;
@@ -247,11 +254,15 @@
 }
 .QADescribe {
   height: 100rem;
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
+  position: relative;
 }
 .QATitle {
-  font-size: 36px;
+  top: 28rem;
+  left: 56rem;
+  position: absolute;
+  font-size: 36rem;
   font-weight: bolder;
   color: #2d2f35;
 }
@@ -287,6 +298,7 @@
   flex-direction: column;
   height: 280rem;
 }
+
 .noDataImg {
   width: 130rem;
 }
@@ -297,4 +309,9 @@
   color: #454C66;
   line-height: 20px;
   margin-top: 16px;
+}
+
+.dotPic {
+  width: 91.5rem;
+  height: 102rem;
 }

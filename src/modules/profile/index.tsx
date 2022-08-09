@@ -13,14 +13,9 @@ import moreBtn from '../../static/more-btn.png';
 import noToken from '../../static/no-token.png';
 import noNft from '../../static/no-nft.png';
 import noQa from '../../static/no-qa.png';
-// import demo1Pic from '../../static/demo-1.png';
-// import demo2Pic from '../../static/demo-2.png';
-// import demo3Pic from '../../static/demo-3.png';
-// import demo4Pic from '../../static/demo-4.png';
-// import demo5Pic from '../../static/demo-5.png';
-// import demo6Pic from '../../static/demo-6.png';
 import arrowUpPic from '../../static/arrow-up.png';
 import arrowDownPic from '../../static/arrow-down.png';
+import dotPic from '../../static/dot.png';
 
 export default function Index() {
   const navigate = useNavigate();
@@ -156,6 +151,7 @@ export default function Index() {
       </div>
       <div className={style.tokenWrap}>
         <div className={style.tokenDescribe}>
+          <img className={style.dotPic} src={dotPic} alt="" />
           <div className={style.profileTitle}>
             Token
           </div>
@@ -207,6 +203,7 @@ export default function Index() {
       </div>
       <div className={style.nftWrap}>
         <div className={style.nftDescribe}>
+          <img className={style.dotPic} src={dotPic} alt="" />
           <div className={style.nftPlateTitle}>
             NFT
           </div>
@@ -259,6 +256,7 @@ export default function Index() {
       }
       <div className={style.QAWrap}>
         <div className={style.QADescribe}>
+          <img className={style.dotPic} src={dotPic} alt="" />
           <div className={style.QATitle}>
             Q&A
           </div>
