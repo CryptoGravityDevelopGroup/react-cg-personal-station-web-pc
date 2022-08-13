@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 .modalContent {
-  min-height: 555px;
+  min-height: 555rem;
 }
 .modalMask {
   position: absolute;

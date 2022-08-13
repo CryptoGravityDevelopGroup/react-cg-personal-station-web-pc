@@ -31,7 +31,7 @@ export default function Index(props) {
     setQuestionList([...questionList]);
   }
   useEffect(() => {
-    callBackFun && callBackFun(questionList);
+    callBackFun && callBackFun(JSON.stringify(questionList));
   },[questionList]);
   return (
     <>
@@ -50,12 +50,14 @@ export default function Index(props) {
                 </div>
                 <Input value={item.question} showCount maxLength={100} style={{marginBottom: '24px',}} onChange={(event) => {
                   item.question = event.target.value;
+                  setQuestionList([...questionList]);
                 }}/>
                 <div className={style.title}>
                   answer
                 </div>
                 <TextArea value={item.answer} className={style.answerContent} showCount maxLength={500}  placeholder="Enter your Answer" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
                   item.answer = event.target.value;
+                  setQuestionList([...questionList]);
                 }} />
               </div>
             )

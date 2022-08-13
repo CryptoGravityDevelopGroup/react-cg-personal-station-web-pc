@@ -103,18 +103,8 @@ export default function Index(props) {
                 {
                   required: true,
                   message: 'Please enter your name',
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    checkoutNickName(value).then((res) => {
-                      if(res.success === true) {
-                        console.log(1);
-                        return Promise.resolve();
-                      } else {
-                        console.log(2);
-                        return Promise.reject(new Error('nickname duplicate!'));
-                      }
-                    });
+                },{
+                  validator: (_, value) => {
                     if(value.indexOf('.eth') !== -1){
                       if(nftNameList.includes(value) === false) {
                         return Promise.reject(new Error(`You havn't the domain name ${value}`));
@@ -123,12 +113,24 @@ export default function Index(props) {
                     if(value.indexOf('.') !== -1 && value.indexOf('.eth') === -1){
                       return Promise.reject(new Error(`"Nicknames in ${value} format cannot be used`));
                     }
+                    return Promise.resolve();
                   }
-                })
+                },{
+                  validator: async (_, value, callback) => {
+                    const res = await checkoutNickName(value);
+                    console.log('checkName', res.data.success);
+                    if(res.data.success) {
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject(new Error('nickname duplicate!'));
+                    }
+                  }
+                }
               ]}
             >
-              <Input placeholder='Enter your name' defaultValue={formdata.nickname} onChange={(event) => {
-                setFormdata({...formdata, ...{ nickname: event.target.value }});
+              <Input placeholder='Enter your name' onChange={(event) => {
+                let value = event.target.value;
+                setFormdata({...formdata, ...{ nickname: value }});
               }} />
             </Form.Item>
             <Form.Item
@@ -145,6 +147,9 @@ export default function Index(props) {
             <Form.Item
               label="about me"
               name="aboutMe"
+              rules={[
+                
+              ]}
             >
               <TextArea showCount maxLength={300} placeholder="Enter your Info" autoSize={{ minRows: 4, maxRows: 4 }} onChange={(event) => {
                 setFormdata({...formdata, ...{ brief: event.target.value }});
