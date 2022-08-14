@@ -34,17 +34,18 @@ export default function Index() {
     window.open(url);
   }
   useEffect(() => {
+    console.log('walletAddress!!!', walletAddress)
     // 获取个人信息
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        console.log('response', response);
-        response.data.tags = JSON.parse(response.data.tags);
-        console.log('response.data.qa', response.data.qa);
+        response.data.tags = response.data.tags.length > 0 ? JSON.parse(response.data.tags) : [];
         let qaArr = [];
         if(response.data.qa.length > 0 ){
-          qaArr = JSON.parse(response.data.qa);
-          qaArr = qaArr.map((item) => {
+          let tempQaArr = JSON.parse(response.data.qa);
+          console.log('tempQaArr', tempQaArr);
+          console.log('tempQaArr', typeof(response.data.qa), response.data.qa);
+          qaArr = tempQaArr.map((item) => {
             return {
               status: false,
               question: item.question,
@@ -52,7 +53,8 @@ export default function Index() {
             }
           });
         }
-        response.data.avatar = response.data.avatar || defaultUser;
+        response.data.avatar = response.data.avatar.lenght > 0 ? response.data.avatar : defaultUser;
+        console.log('response.data', response.data);
         setUserInfo(response.data);
         setQAList(qaArr);
       }
@@ -63,6 +65,7 @@ export default function Index() {
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
+      console.log('获取NFT', response);
       if(response.code === 0) {
         let tempArr =response.data.map((item) => {
           return {

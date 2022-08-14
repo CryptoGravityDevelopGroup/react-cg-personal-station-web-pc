@@ -27,7 +27,8 @@ export async function connectWallte() {
 }
 // 获取钱包地址
 export function getCurAddress() {
-  if (window.ethereum && window.ethereum.selectedAddress) {
+  console.log('getCurAddress', window.ethereum.selectedAddress);
+  if (window.ethereum && window.ethereum.selectedAddress && window.ethereum.selectedAddress.length > 0) {
     return window.ethereum.selectedAddress;
   } else {
     window.location.pathname = "/";

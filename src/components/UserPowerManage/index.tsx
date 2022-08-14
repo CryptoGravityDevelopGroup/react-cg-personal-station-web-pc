@@ -51,8 +51,10 @@ export default function Index() {
   const handleProfileModalOk = () => {
     formdata.ethAddress = walletAddress;
     formdata.tags = JSON.stringify(formdata.tags);
+    formdata.qa = JSON.stringify(formdata.qa);
     upDateUsers({...formdata}).then((res) => {
       console.log('====', res);
+      window.location.reload();
     })
     setIsProfileModalVisible(false);
   }
@@ -61,6 +63,7 @@ export default function Index() {
     qaList.qa = JSON.stringify(qaList.qa);
     upDateQuestion({...qaList}).then((res) => {
       console.log('====', res);
+      window.location.reload();
     })
     setIsQAModalVisible(false);
   };
@@ -75,21 +78,20 @@ export default function Index() {
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        const temp = response.data.token.map(item => {
+        const temp = response.data.map(item => {
           return {
             img: item.logo
           }
         });
-        setHeaderPicArr(temp);
+        // setInitFormData({...initFormData, })
       }
     });
     // 获取个人信息
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        response.data.qa = JSON.parse(response.data.qa);
-        response.data.tags = JSON.parse(response.data.tags);
-        console.log('initFormData', initFormData);
+        response.data.qa = response.data.qa.length > 0 ? JSON.parse(response.data.qa) : [];
+        response.data.tags = response.data.tags.length > 0 ? JSON.parse(response.data.tags) : [];
         setInitFormData(JSON.parse(JSON.stringify(response.data)))
         setFormdata(response.data);
       }
@@ -139,11 +141,15 @@ export default function Index() {
             <Profile
             initFormData={initFormData}
             profileDataChange={(obj) => {
-              setFormdata({ ...obj });
+              console.log(obj);
+              setFormdata({ ...formdata ,...obj });
             }}
             onFinishCallBack={() => {
               handleProfileModalOk();
-            }} 
+            }}
+            onFinishFailedCallBack={() => {
+
+            }}
             >
               <div className={styles.fromBottom}>
                 <div className='button'>
@@ -163,14 +169,14 @@ export default function Index() {
           <QuestionAndAnswer initQaList={initFormData.qa} isShowDoneBtn={false} callBackFun={(obj) => {
             qaList = { 'qa': obj };
           }}/>
-        </div>
-        <div className={styles.fromBottom}>
+          <div className={styles.fromBottom}>
           <div className='button'>
-            <Button size='large' type="primary" shape="round" block htmlType='submit' onClick={() => {
-              handleQAModalOk();
-            }}>
-              Ok
-            </Button>
+              <Button size='large' type="primary" shape="round" block htmlType='submit' onClick={() => {
+                handleQAModalOk();
+              }}>
+                Ok
+              </Button>
+            </div>
           </div>
         </div>
       </Modal>

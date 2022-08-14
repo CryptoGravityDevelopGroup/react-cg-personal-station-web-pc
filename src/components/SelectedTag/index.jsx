@@ -51,7 +51,7 @@ export default function Index(props) {
           setIsModalVisible(true);
         }} />
       </div>
-      <Modal visible={isModalVisible} title='tag' onOk={() => {
+      <Modal visible={isModalVisible} title='tag' onClose={() => {
         setIsModalVisible(false);
       }}>
         <div className={ styles.modalContent }>

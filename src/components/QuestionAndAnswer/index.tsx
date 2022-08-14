@@ -7,17 +7,10 @@ import addBtnPic from '../../static/add-btn.png'
 export default function Index(props) {
   const { onNext, isShowDoneBtn, callBackFun, initQaList } = props;
   const { TextArea } = Input;
-  const [questionList, setQuestionList] = useState(() => {
-    if(initQaList && initQaList.lenght > 0) {
-      return [...initQaList];
-    }
-    return [
-      {
-        question: '',
-        answer:''
-      }
-    ]
-  });
+  const [questionList, setQuestionList] = useState([{
+    question: '',
+    answer:''
+  }]);
   const deleteQuestion = (index) => {
     questionList.splice(index,1);
     setQuestionList([...questionList]);
@@ -33,8 +26,19 @@ export default function Index(props) {
     let tempArr = questionList.filter((item) => {
       return item.question.length !== 0 && item.answer.length !== 0;
     });
-    callBackFun && callBackFun(JSON.stringify(tempArr));
+    callBackFun && callBackFun(tempArr);
   },[questionList]);
+  useEffect(() => {
+    if(initQaList && initQaList.length > 0) {
+      setQuestionList([...initQaList]);
+    } else {
+      setQuestionList([{
+        question: '111',
+        answer:'223'
+      }]);
+    }
+  }, [initQaList])
+  
   return (
     <>
       <div className={style.wrap}>
