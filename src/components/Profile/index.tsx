@@ -14,8 +14,8 @@ import instagramPic from '@/static/instagram.png';
 import defaultUserPic from '@/static/default_user.png';
 
 export default function Index(props) {
-  const { profileDataChange, initFormData } = props;
-  console.log('-----', initFormData);
+  const { profileDataChange, initFormData, children, onFinishCallBack, onFinishFailedCallBack } = props;
+  const [form] = Form.useForm();
   const walletAddress = getCurAddress();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userPicIndex, setUserPicIndex] = useState(null);
@@ -40,7 +40,6 @@ export default function Index(props) {
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
-      console.log('***', response.data);
       if(response.code === 0) {
         let tempNftName = [];
         const temp = response.data.token.map(item => {
@@ -59,8 +58,14 @@ export default function Index(props) {
     });
   }, []);
   useEffect(() => {
-    profileDataChange(formdata);
+    profileDataChange && profileDataChange(formdata);
   }, [formdata])
+
+  useEffect(() => {
+    // formCheckStatus && formCheckStatus(form.getFieldError('name'));
+    console.log("form.getFieldError('name')", form.getFieldError('name'));
+  }, [form.getFieldError('name')])
+  
   
   return (
     <>
@@ -81,6 +86,7 @@ export default function Index(props) {
             </Col>
           </Row>
           <Form
+            form = {form}
             name="useInfo"
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 19 }}
@@ -94,6 +100,12 @@ export default function Index(props) {
               Twitter: initFormData.twitterId,
               Telegram: initFormData.telegramId,
             }}
+            onFinish={() => {
+              onFinishCallBack && onFinishCallBack();
+            }}
+            onFinishFailedCallBack ={() => {
+              onFinishFailedCallBack && onFinishFailedCallBack();
+            }}
           >
             <Form.Item
               label="name"
@@ -103,8 +115,12 @@ export default function Index(props) {
                 {
                   required: true,
                   message: 'Please enter your name',
-                },{
+                },
+                {
                   validator: (_, value) => {
+                    if(value === undefined) {
+                      return Promise.resolve();
+                    }
                     if(value.indexOf('.eth') !== -1){
                       if(nftNameList.includes(value) === false) {
                         return Promise.reject(new Error(`You havn't the domain name ${value}`));
@@ -115,15 +131,24 @@ export default function Index(props) {
                     }
                     return Promise.resolve();
                   }
-                },{
+                },
+                {
                   validator: async (_, value, callback) => {
-                    const res = await checkoutNickName(value);
-                    console.log('checkName', res.data.success);
-                    if(res.data.success) {
+                    if(value === undefined || value.length === 0) {
                       return Promise.resolve();
-                    } else {
-                      return Promise.reject(new Error('nickname duplicate!'));
                     }
+                    try {
+                      const res = await checkoutNickName(value);
+                      console.log('checkName', res.data.success);
+                      if(res.data.success) {
+                        return Promise.resolve();
+                      } else {
+                        return Promise.reject(new Error('nickname duplicate!'));
+                      }
+                    } catch (error) {
+                      return Promise.reject(new Error('nickname check error!'));
+                    }
+                    
                   }
                 }
               ]}
@@ -193,6 +218,7 @@ export default function Index(props) {
                 setFormdata({...formdata, ...{ email: event.target.value }});
               }} suffix={<img src={telegramPic} alt="email"/>} />
             </Form.Item> */}
+            {children}
           </Form>
         </div>
       </div>

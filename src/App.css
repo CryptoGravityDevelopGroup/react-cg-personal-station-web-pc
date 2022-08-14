@@ -16,12 +16,13 @@ body {
 .button {
   width: 208rem;
   height: 48rem;
-  cursor: pointer;
-  border-radius: 24px;
-  background: #3772ff;
   text-align: center;
   line-height: 48rem;
   font-size: 16rem;
   font-weight: bold;
   color: #fcfcfd;
+}
+.disabled-button {
+  background: #ccc;
+  cursor: not-allowed;
 }

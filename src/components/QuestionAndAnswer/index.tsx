@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Input } from 'antd';
-
+import { Input, Button } from 'antd';
 import style from './index.module.css';
 import deleteBtnPic from '../../static/delete-btn.png'
 import addBtnPic from '../../static/add-btn.png'
@@ -74,9 +73,13 @@ export default function Index(props) {
         
         {
           isShowDoneBtn === false ? "" : (
-            <div className={'button'} onClick={() => {
+            <div className='button' onClick={() => {
               onNext(questionList);
-            }}>Done</div>
+            }}>
+              <Button size='large' type="primary" shape="round" block htmlType='submit'>
+                Done
+              </Button>
+            </div>
           )
         }
       </div>

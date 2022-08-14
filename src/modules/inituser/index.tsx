@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Button } from 'antd';
 import Header from "../../components/Header/index.tsx";
 import ConnectWallet from "../../components/ConnectWallet/index.tsx";
 import InitUserSteps from "../../components/InitUserSteps/index.tsx";
@@ -38,15 +39,25 @@ export default function InitUser() {
           <>
             <Profile initFormData = {{
               tags: []
-            }} profileDataChange={(obj) => {
-              console.log('obj', obj);
+            }}
+            profileDataChange={(obj) => {
               userInfo = { ...obj };
-            }}/>
-            <div className={style.fromBottom}>
-              <div className={'button'} onClick={() => {
-                setCurstep(3);
-              }}>Next</div>
-            </div>
+            }}
+            onFinishCallBack={() => {
+              setCurstep(3);
+            }} 
+            onFinishFailedCallBack ={() => {
+              setCurstep(2);
+            }}
+            >
+              <div className={style.fromBottom}>
+                <div className='button'>
+                  <Button type="primary" shape="round" block htmlType='submit'>
+                    Next
+                  </Button>
+                </div>
+              </div>
+            </Profile>
           </>
         )
       }
