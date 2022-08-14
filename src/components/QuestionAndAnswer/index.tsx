@@ -30,7 +30,10 @@ export default function Index(props) {
     setQuestionList([...questionList]);
   }
   useEffect(() => {
-    callBackFun && callBackFun(JSON.stringify(questionList));
+    let tempArr = questionList.filter((item) => {
+      return item.question.length !== 0 && item.answer.length !== 0;
+    });
+    callBackFun && callBackFun(JSON.stringify(tempArr));
   },[questionList]);
   return (
     <>

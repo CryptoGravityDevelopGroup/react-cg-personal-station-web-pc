@@ -14,7 +14,8 @@ body {
   margin-bottom: 30px !important;
 }
 .button {
-  width: 208rem;
+  display: inline-block;
+  min-width: 208rem;
   height: 48rem;
   text-align: center;
   line-height: 48rem;
