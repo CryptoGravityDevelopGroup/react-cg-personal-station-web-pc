@@ -71,6 +71,7 @@ export default function Index() {
     logout();
   }
   useEffect(() => {
+    if(!walletAddress) return;
     // 获取 NFT
     getTokenList({
       "ethAddress": walletAddress,
@@ -96,7 +97,7 @@ export default function Index() {
         setFormdata(response.data);
       }
     })
-  }, []);
+  }, [walletAddress]);
   return (
     <>
       <div className={styles.warp} ref={menuList}>

@@ -35,6 +35,7 @@ export default function Index() {
   }
   useEffect(() => {
     console.log('walletAddress!!!', walletAddress)
+    if(!walletAddress) return;
     // 获取个人信息
     getUsersInfo({walletAddress: walletAddress, nickName: ''}).then((res) => {
       const response = res.data;
@@ -53,7 +54,7 @@ export default function Index() {
             }
           });
         }
-        response.data.avatar = response.data.avatar.lenght > 0 ? response.data.avatar : defaultUser;
+        response.data.avatar = response.data.avatar ? response.data.avatar : defaultUser;
         console.log('response.data', response.data);
         setUserInfo(response.data);
         setQAList(qaArr);
@@ -97,7 +98,7 @@ export default function Index() {
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [walletAddress]);
   useEffect(() => {
     let tempAllTokenVal = 0, tempMaxTokenVal  = 0;
     tokenList.forEach(item => {

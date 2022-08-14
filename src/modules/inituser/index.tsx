@@ -16,6 +16,7 @@ export default function InitUser() {
   const handleRegisterUser = () => {
     const address = getCurAddress();
     const params = { ...userInfo, "ethAddress": address };
+    params.email = 'unknow';
     params.tags = JSON.stringify(params.tags); 
     params.qa = JSON.stringify(params.qa); 
     registerUser(params).then(() => {

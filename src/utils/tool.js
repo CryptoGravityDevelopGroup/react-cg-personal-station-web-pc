@@ -31,7 +31,7 @@ export function getCurAddress() {
   if (window.ethereum && window.ethereum.selectedAddress && window.ethereum.selectedAddress.length > 0) {
     return window.ethereum.selectedAddress;
   } else {
-    window.location.pathname = "/";
+    window.location.pathname = "/main";
   }
 }
 // 签名

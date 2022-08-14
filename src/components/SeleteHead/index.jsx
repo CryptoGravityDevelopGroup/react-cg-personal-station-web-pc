@@ -13,7 +13,7 @@ export default function Index(props) {
   };
   return (
     <>
-      <Modal visible={isModalVisible} title='Please select a portrait' onOk={() => {
+      <Modal visible={isModalVisible} title='Please select a portrait' onClose={() => {
         handleOk(headerPicIndex);
       }}>
         <div className={styles.headerPicWrap}>

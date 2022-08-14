@@ -33,8 +33,8 @@ export default function Index(props) {
       setQuestionList([...initQaList]);
     } else {
       setQuestionList([{
-        question: '111',
-        answer:'223'
+        question: '',
+        answer: ''
       }]);
     }
   }, [initQaList])
