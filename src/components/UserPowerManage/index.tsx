@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Button } from "antd";
 import Modal from '../Modal/index.tsx';
 import QuestionAndAnswer from "../QuestionAndAnswer/index.tsx";
 import { getTokenList, upDateUsers, upDateQuestion, getUsersInfo } from '../../api/user';
@@ -130,25 +131,47 @@ export default function Index() {
           </div>
         }
       </div>
-      <Modal visible={isProfileModalVisible} title='Edit profile' onOk={() => {
-        handleProfileModalOk();
+      <Modal visible={isProfileModalVisible} title='Edit profile' onClose={() => {
+        setIsProfileModalVisible(false);
       }}>
         <div className={styles.useInfoForm}>
           <div className={styles.content}>
-            <Profile initFormData={initFormData} profileDataChange={(obj) => {
-              // userInfo = { ...obj };
+            <Profile
+            initFormData={initFormData}
+            profileDataChange={(obj) => {
               setFormdata({ ...obj });
-            }}/>
+            }}
+            onFinishCallBack={() => {
+              handleProfileModalOk();
+            }} 
+            >
+              <div className={styles.fromBottom}>
+                <div className='button'>
+                  <Button type="primary" shape="round" block htmlType='submit'>
+                    Ok
+                  </Button>
+                </div>
+              </div>
+            </Profile>
           </div>
         </div>
       </Modal>
-      <Modal visible={isQAModalVisible} title='Edit Q&A' onOk={() => {
-        handleQAModalOk();
+      <Modal visible={isQAModalVisible} title='Edit Q&A' onClose={() => {
+        setIsQAModalVisible(false);
       }}>
         <div className={styles.aqModalContentWarp}>
           <QuestionAndAnswer initQaList={initFormData.qa} isShowDoneBtn={false} callBackFun={(obj) => {
             qaList = { 'qa': obj };
           }}/>
+        </div>
+        <div className={styles.fromBottom}>
+          <div className='button'>
+            <Button size='large' type="primary" shape="round" block htmlType='submit' onClick={() => {
+              handleQAModalOk();
+            }}>
+              Ok
+            </Button>
+          </div>
         </div>
       </Modal>
     </>

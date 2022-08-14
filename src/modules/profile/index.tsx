@@ -302,7 +302,7 @@ export default function Index() {
           QAList.length === 0 && (
             <div className={style.noData}>
               <img className={style.noDataImg} src={noQa} alt="noQa" />
-              <div className={style.noDataTips}>no NFT</div>
+              <div className={style.noDataTips}>no Q&A</div>
             </div>
           )
         }
