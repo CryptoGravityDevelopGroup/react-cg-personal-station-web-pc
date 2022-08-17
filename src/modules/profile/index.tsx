@@ -16,8 +16,9 @@ import noQa from '../../static/no-qa.png';
 import arrowUpPic from '../../static/arrow-up.png';
 import arrowDownPic from '../../static/arrow-down.png';
 import dotPic from '../../static/dot.png';
+import { connect } from 'react-redux';
 
-export default function Index() {
+let Index = ({changeUserInfo, changeTokenList, changeNftList}) => {
   const navigate = useNavigate();
   const walletAddress = getCurAddress();
   const [tokenList, setTokenList] = useState([]);
@@ -57,6 +58,7 @@ export default function Index() {
         response.data.avatar = response.data.avatar ? response.data.avatar : defaultUser;
         console.log('response.data', response.data);
         setUserInfo(response.data);
+        changeUserInfo(response.data);
         setQAList(qaArr);
       }
     })
@@ -66,7 +68,6 @@ export default function Index() {
       "tokenType":"nft"
     }).then((res) => {
       const response = res.data;
-      console.log('获取NFT', response);
       if(response.code === 0) {
         let tempArr =response.data.map((item) => {
           return {
@@ -78,6 +79,7 @@ export default function Index() {
         });
         tempArr = tempArr.filter((item) => item.isValid === 1);
         setNftList(tempArr.slice(0, 6));
+        changeNftList(tempArr);
       }
     });
     // 获取Token
@@ -87,14 +89,16 @@ export default function Index() {
     }).then((res) => {
       const response = res.data;
       if(response.code === 0) {
-        setTokenList(response.data.map((item) => {
+        let temp = response.data.map((item) => {
           return {
             tokenLogo: item.logo,
             tokenName: item.name,
             tokenNum: item.balance / Math.pow(10,item.tokenDecimal),
             tokenPrice: item.balance / Math.pow(10,item.tokenDecimal)*item.price
           }
-        }));
+        })
+        setTokenList(temp);
+        changeTokenList(temp);
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -314,3 +318,17 @@ export default function Index() {
     </div>
   )
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeUserInfo: (value) => {
+      dispatch({type: 'CHANGE_USER_INFO', value})
+    },
+    changeTokenList: (value) => {
+      dispatch({type: 'CHANGE_TOKEN_LIST', value})
+    },
+    changeNftList: (value) => {
+      dispatch({type: 'CHANGE_NFT_LIST', value})
+    }
+  }
+}
+export default Index = connect(null, mapDispatchToProps)(Index);

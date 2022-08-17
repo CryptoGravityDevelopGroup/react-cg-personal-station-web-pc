@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from "antd";
 import html2canvas from 'html2canvas';
+import QRCode from 'qrcodejs2'
 import Modal from '../Modal/index.tsx';
 import QuestionAndAnswer from "../QuestionAndAnswer/index.tsx";
 import { getTokenList, upDateUsers, upDateQuestion, getUsersInfo } from '../../api/user';
 import { getCurAddress, logout } from '../../utils/tool';
 import Profile from "../../components/Profile/index.tsx";
+import { connect } from 'react-redux';
 
 import upmBtnPic from '../../static/upm-btn.png';
 import logoutPic from '../../static/logout.png';
@@ -17,18 +19,19 @@ import qrCodePic from '../../static/qrCode.png';
 import defaultUserPic from '../../static/default_user.png';
 import tokenLinePic from '../../static/token_line.png';
 import arrowPic from '../../static/arrow.png';
-import ethLogo from '../../static/eth-logo.png';
-import demo4 from '../../static/demo-4.png';
+import downBtn from '../../static/down-prost_btn.png'
 
 import styles from './index.module.css';
-export default function Index() {
+let Index = ({userInfo, tokenList, nftList}) => {
   let qaList = {};
   const walletAddress = getCurAddress();
   const [menuListStatus, setMenuListStatus] = useState(false);
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
   const [isQAModalVisible, setIsQAModalVisible] = useState(false);
   const [isPosterModalVisible, setisPosterModalVisible] = useState(false);
-  const posterDom = useRef();
+  const [allTokenVal, setAllTokenVal] = useState(0);
+  const posterDom = useRef(null);
+  const qrcodeDom = useRef(null)
   const [formdata, setFormdata] = useState({
     tags:[],
     qa:[]
@@ -38,7 +41,7 @@ export default function Index() {
     qa:[]
   });
   const menuList = useRef();
- 
+
   useEffect(() => {
     if(menuListStatus) {
       (document.getElementsByTagName('body')[0]).addEventListener('click', (event) => {
@@ -102,7 +105,7 @@ export default function Index() {
     html2canvas(posterDom.current).then(function(canvas) {
       console.log('canvas');
       downLoad(saveAsPNG(canvas))
-      // document.body.appendChild(canvas);
+      setisPosterModalVisible(false);
     });
   }
   useEffect(() => {
@@ -142,7 +145,33 @@ export default function Index() {
     if(!isPosterModalVisible) {
       bodyDOM.style.overflow = 'auto';
     }
-  }, [isPosterModalVisible])
+  }, [isPosterModalVisible]);
+
+  useEffect(() => {
+    if(isPosterModalVisible) {
+      new QRCode(qrcodeDom.current, {
+          text: window.location, // 扫码后页面地址
+          width: qrcodeDom.current.offsetWidth, // 二维码宽度
+          height: qrcodeDom.current.offsetHeight, // 二维码高度
+          colorDark: "#000000", // 二维码颜色
+          colorLight: "#ffffff", // 背景颜色
+          correctLevel: QRCode.CorrectLevel.H // 校正水准
+      });
+    } else {
+      if(qrcodeDom && qrcodeDom.current){
+        qrcodeDom.current.innerText = '';
+      }
+    }
+  }, [isPosterModalVisible]);
+
+  useEffect(() => {
+    let tempAllTokenVal = 0;
+    tokenList.forEach(item => {
+      tempAllTokenVal = tempAllTokenVal + item.tokenPrice;
+    })
+    setAllTokenVal(tempAllTokenVal);
+  }, [tokenList])
+  
   return (
     <>
       <div className={styles.warp} ref={menuList}>
@@ -250,7 +279,7 @@ export default function Index() {
                   <div className={styles.userHeadPic}>
                     <img src={defaultUserPic} alt="defaultUserPic" />
                   </div>
-                  <div className={styles.userName}>leo zeng</div>
+                  <div className={styles.userName}>{userInfo.nickname}</div>
                   <div className={styles.tokenWrap}>
                     <div className={styles.tokenWrapLeft}>
                       <div >Token</div>
@@ -259,45 +288,42 @@ export default function Index() {
                     <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
                   </div>
                   <div className={styles.tokenTips}>
-                    <span>共持有<span style={{fontSize: '17rem', color: '#454C66'}}>&nbsp;12&nbsp;</span>种token &nbsp;&nbsp; 共价值 <span style={{
+                    <span>共持有<span style={{fontSize: '17rem', color: '#454C66'}}>&nbsp;{tokenList.length}&nbsp;</span>种token &nbsp;&nbsp; 共价值 <span style={{
                       fontSize: '17rem', color: '#454C66'
-                    }}>$46,764.54</span></span>
+                    }}>${allTokenVal}</span></span>
                   </div>
                   <div className={styles.tokenList}>
-                    <div className={styles.toeknItem}>
-                      <img src={ethLogo} alt="" />
-                      <div className={styles.tokenDetail}>
-                        <div className={styles.tokenName}>Ethereum</div>
-                        <div className={styles.tokenNum}>x&nbsp;65.35</div>
-                        <div className={styles.tokenVal}>$85,814.75</div>
-                      </div>
-                    </div>
-                    <div className={styles.toeknItem}>
-                      <img src={ethLogo} alt="" />
-                      <div className={styles.tokenDetail}>
-                        <div className={styles.tokenName}>Ethereum</div>
-                        <div className={styles.tokenNum}>x&nbsp;65.35</div>
-                        <div className={styles.tokenVal}>$85,814.75</div>
-                      </div>
-                    </div>
-                    <div className={styles.toeknItem}>
-                      <img src={ethLogo} alt="" />
-                      <div className={styles.tokenDetail}>
-                        <div className={styles.tokenName}>Ethereum</div>
-                        <div className={styles.tokenNum}>x&nbsp;65.35</div>
-                        <div className={styles.tokenVal}>$85,814.75</div>
-                      </div>
-                    </div>
-                    <div className={styles.toeknItem}>
-                      <div className={styles.tokenMoreImg}>
-                        more
-                      </div>
-                      <div className={styles.tokenDetail}>
-                        <div className={styles.tokenMoreNum}>
-                          +15
+                    {
+                      tokenList.filter((item, index) => {
+                        if(index < 3){
+                          return true;
+                        }
+                        return false;
+                      }).map((item) => {
+                        return (
+                          <div className={styles.toeknItem}>
+                            <img src={item.tokenLogo} alt="" />
+                            <div className={styles.tokenDetail}>
+                              <div className={styles.tokenName}>{item.tokenName}</div>
+                              <div className={styles.tokenNum}>x&nbsp;{item.tokenNum}</div>
+                              <div className={styles.tokenVal}>${item.tokenPrice}</div>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                    {
+                      tokenList.length > 4 && (<div className={styles.toeknItem}>
+                        <div className={styles.tokenMoreImg}>
+                          more
                         </div>
-                      </div>
-                    </div>
+                        <div className={styles.tokenDetail}>
+                          <div className={styles.tokenMoreNum}>
+                            +{tokenList.length - 3}
+                          </div>
+                        </div>
+                      </div>)
+                    }
                   </div>
                   <div className={styles.nftWrap}>
                     <div className={styles.tokenWrapLeft}>
@@ -307,30 +333,44 @@ export default function Index() {
                     <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
                   </div>
                   <div className={styles.nftTips}>
-                    <span>共持有&nbsp;<span style={{fontSize: '17rem', color: '#454C66'}}>12</span>&nbsp;个NFT &nbsp;&nbsp; 来自于 <span style={{
+                    <span>共持有&nbsp;<span style={{fontSize: '17rem', color: '#454C66'}}>{nftList.length}</span>&nbsp;个NFT &nbsp;&nbsp; 来自于 <span style={{
                       fontSize: '17rem', color: '#454C66'
-                    }}>24</span>&nbsp;个不同的项目</span>
+                    }}>很多</span>&nbsp;个不同的项目</span>
                   </div>
                   <div className={styles.nftList}>
-                    <img className={styles.nftItem} src={demo4} alt="img"/>
-                    <img className={styles.nftItem} src={demo4} alt="img"/>
-                    <img className={styles.nftItem} src={demo4} alt="img"/>
-                    <img className={styles.nftItem} src={demo4} alt="img"/>
-                    <img className={styles.nftItem} src={demo4} alt="img"/>
-                    <div className={styles.nftMore}>
-                      <div className={styles.nftNum}>+&nbsp;14</div>
-                      <div className={styles.nftMoreTips}>more</div>
-                    </div>
+                    {
+                      nftList.length > 0 && (
+                        nftList.filter((item, index) =>{
+                          if(index < 3) {
+                            return true;
+                          } else {
+                            return false
+                          }
+                        }).map((item) => {
+                          return <img className={styles.nftItem} src={item.img} alt="NFtimg"/>
+                        })
+                      )
+                    }
+                    {
+                      nftList.length > 5 && (
+                        <div className={styles.nftMore}>
+                          <div className={styles.nftNum}>+&nbsp;{nftList.length - 5}</div>
+                          <div className={styles.nftMoreTips}>more</div>
+                        </div>
+                      )
+                    }
                   </div>
                 </div>
                 <div className={styles.posterBottomWrap}>
                   <div className={styles.bottomTips}>扫码进入我的web3身份空间</div>
-                  <div className={styles.qrImgWrap}></div>
+                  <div ref={qrcodeDom} className={styles.qrImgWrap}></div>
                 </div>
               </div>
               <div className={styles.downPoster} onClick={() => {
                 downPoster()
-              }}></div>
+              }}>
+                <img style={{width: '100%'}} src={downBtn} alt="downBtn" />
+              </div>
             </div>
           </>
         ), document.getElementsByTagName('body')[0])
@@ -338,3 +378,12 @@ export default function Index() {
     </>
   )
 }
+const mapStateToProps = (state) => {
+  console.log('state', state)
+  return {
+    userInfo: state.userInfo,
+    tokenList: state.tokenList,
+    nftList: state.nftList
+  }
+}
+export default Index = connect(mapStateToProps, null)(Index);
