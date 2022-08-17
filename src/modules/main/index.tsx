@@ -7,6 +7,7 @@ import startPic from '../../static/startPic.png';
 // import mainLogo from '../../static/main-logo.png';
 import { connectWallte, handleSignMessage } from '../../utils/tool';
 import { login, registerUser } from '../../api/user';
+import html2canvas from 'html2canvas';
 
 const Main = function () {
   const navigate = useNavigate();

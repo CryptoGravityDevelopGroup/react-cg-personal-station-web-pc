@@ -78,3 +78,212 @@
   text-align: center;
   margin: 0 auto;
 }
+.posterWrap {
+  width: 360rem;
+  height: 778rem;
+  background-image: url('../../static/poster-bg.png');
+  background-repeat: no-repeat;
+	background-attachment:fixed;
+  background-size: auto 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  padding: 16rem;
+}
+.posterHeaderWrap img {
+  height: 24rem;
+}
+.posterContentWrap {
+  background-image: url('../../static/poster-content-bg.png');
+  background-repeat: no-repeat;
+	background-attachment:fixed;
+  background-size: auto 100%;
+  width: 328rem;
+  height: 617rem;
+  position: relative;
+}
+.userHeadPic {
+  position: absolute;
+  left: 36rem;
+  width: 64rem;
+  height: 64rem;
+  border-radius: 50%;
+  opacity: 1;
+  border: 3rem solid rgba(255,255,255,0.8);
+}
+.userHeadPic img {
+  width: 100%;
+}
+.tokenWrap {
+  height: 32rem;
+  position: absolute;
+  top: 84rem;
+  left: 16rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  right: 16rem;
+}
+.tokenWrapLeft img {
+  height: 8rem;
+}
+.arrowPic {
+  height: 12rem;
+}
+.userName {
+  position: absolute;
+  top: 24rem;
+  left: 116rem;
+  font-size: 16rem;
+  font-weight: normal;
+  color: #2D2F35
+}
+.tokenTips {
+  position: absolute;
+  top: 128rem;
+  left: 16rem;
+  font-size: 12px;
+  font-weight: normal;
+  color: #454C66;
+}
+.tokenList {
+  position: absolute;
+  top: 158rem;
+  left: 16rem;
+  right: 16rem;
+  width: 296rem;
+  height: 132rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.nftList {
+  position: absolute;
+  top: 380rem;
+  left: 16rem;
+  right: 16rem;
+  width: 296rem;
+  height: 132rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.toeknItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rem 12rem;
+  width: 142rem;
+  height: 60rem;
+  border-radius: 16rem;
+  background: #FFFFFF;
+  margin-bottom: 12rem;
+}
+.tokenDetail {
+  min-width: 70rem;
+}
+.nftItem {
+  width: 90rem;
+  height: 90rem;
+  border-radius: 5%;
+  opacity: 1;
+  margin-bottom: 12rem;
+}
+.nftMore {
+  width: 90rem;
+  height: 90rem;
+  background: #FFFFFF;
+  border: 1px solid #E6E8EB;
+  text-align: center;
+  margin-bottom: 12rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.tokenMoreImg {
+  width: 36rem;
+  height: 36rem;
+  background: #B5B5B5;
+  border-radius: 50%;
+  font-size: 12rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 36rem;
+  text-align: center;
+}
+.tokenMoreNum {
+  font-size: 24px;
+  font-weight: 400;
+  color: #9E9E9E;
+}
+.toeknItem img {
+  width: 36rem;
+  height: 36rem;
+  border-radius: 50%;
+}
+.tokenName {
+  font-size: 12px;
+  font-weight: bolder;
+  color: #0E1228;
+}
+.tokenNum {
+  font-size: 10px;
+  font-weight: bolder;
+  color: #0E1228;
+}
+.tokenVal {
+  font-size: 10px;
+  color: #454C66;
+}
+.nftWrap {
+  height: 32rem;
+  position: absolute;
+  top: 306rem;
+  left: 16rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  right: 16rem;
+}
+.nftTips {
+  position: absolute;
+  top: 346rem;
+  left: 16rem;
+  font-size: 12rem;
+  font-weight: normal;
+  color: #454C66;
+}
+.nftNum {
+  font-size: 24rem;
+  font-weight: 400;
+  color: #9E9E9E;
+}
+.nftMoreTips {
+  font-size: 14rem;
+  font-weight: 400;
+  color: #9E9E9E;
+}
+.posterBottomWrap {
+  width: 326rem;
+  height: 65rem;
+  background-image: url('../../static/poster-bottom-bg.png');
+  background-repeat: no-repeat;
+	background-attachment:fixed;
+  background-size: auto 100%;
+  font-family: Helvetica;
+  margin-top: 20rem;
+  display: flex;
+  align-items: center;
+  padding-left: 48rem;
+}
+.bottomTips {
+  font-size: 12rem;
+  color: #454C66;
+  margin-right: 35rem;
+}
+.qrImgWrap {
+  width: 48rem;
+  height: 48rem;
+  background-color: #ccc;
+}

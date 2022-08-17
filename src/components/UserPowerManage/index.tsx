@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { Button } from "antd";
 import Modal from '../Modal/index.tsx';
 import QuestionAndAnswer from "../QuestionAndAnswer/index.tsx";
@@ -8,8 +9,15 @@ import Profile from "../../components/Profile/index.tsx";
 
 import upmBtnPic from '../../static/upm-btn.png';
 import logoutPic from '../../static/logout.png';
+import logoPic from '../../static/logo.png';
 import questionPic from '../../static/question.png';
 import userProfilePic from '../../static/user-profile.png';
+import qrCodePic from '../../static/qrCode.png';
+import defaultUserPic from '../../static/default_user.png';
+import tokenLinePic from '../../static/token_line.png';
+import arrowPic from '../../static/arrow.png';
+import ethLogo from '../../static/eth-logo.png';
+import demo4 from '../../static/demo-4.png';
 
 import styles from './index.module.css';
 export default function Index() {
@@ -67,6 +75,9 @@ export default function Index() {
     })
     setIsQAModalVisible(false);
   };
+  const showMyQRCode = () => {
+
+  }
   const handleLogout = () => {
     logout();
   }
@@ -122,6 +133,14 @@ export default function Index() {
                 <img src={questionPic}  alt="questionPic"/>
               </div>
               <span className={styles.itemName}>Edit Q&A</span>
+            </div>
+            <div className={styles.menuItem} onClick={() => {
+              showMyQRCode();
+            }}>
+              <div className={styles.itemIcon}>
+                <img src={qrCodePic}  alt="qrCodePic"/>
+              </div>
+              <span className={styles.itemName}>My QR code</span>
             </div>
             <div className={styles.menuItem} onClick={() => {
               handleLogout();
@@ -181,6 +200,96 @@ export default function Index() {
           </div>
         </div>
       </Modal>
+      {
+        ReactDOM.createPortal((
+          <div className={styles.posterWrap}>
+            <div className={styles.posterHeaderWrap}>
+              <img src={logoPic} alt="logoutPic" />
+            </div>
+            <div className={styles.posterContentWrap}>
+              <div className={styles.userHeadPic}>
+                <img src={defaultUserPic} alt="defaultUserPic" />
+              </div>
+              <div className={styles.userName}>leo zeng</div>
+              <div className={styles.tokenWrap}>
+                <div className={styles.tokenWrapLeft}>
+                  <div >Token</div>
+                  <img src={tokenLinePic} alt="tokenLinePic" />
+                </div>
+                <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
+              </div>
+              <div className={styles.tokenTips}>
+                <span>共持有<span style={{fontSize: '17rem', color: '#454C66'}}>&nbsp;12&nbsp;</span>种token &nbsp;&nbsp; 共价值 <span style={{
+                  fontSize: '17rem', color: '#454C66'
+                }}>$46,764.54</span></span>
+              </div>
+              <div className={styles.tokenList}>
+                <div className={styles.toeknItem}>
+                  <img src={ethLogo} alt="" />
+                  <div className={styles.tokenDetail}>
+                    <div className={styles.tokenName}>Ethereum</div>
+                    <div className={styles.tokenNum}>x&nbsp;65.35</div>
+                    <div className={styles.tokenVal}>$85,814.75</div>
+                  </div>
+                </div>
+                <div className={styles.toeknItem}>
+                  <img src={ethLogo} alt="" />
+                  <div className={styles.tokenDetail}>
+                    <div className={styles.tokenName}>Ethereum</div>
+                    <div className={styles.tokenNum}>x&nbsp;65.35</div>
+                    <div className={styles.tokenVal}>$85,814.75</div>
+                  </div>
+                </div>
+                <div className={styles.toeknItem}>
+                  <img src={ethLogo} alt="" />
+                  <div className={styles.tokenDetail}>
+                    <div className={styles.tokenName}>Ethereum</div>
+                    <div className={styles.tokenNum}>x&nbsp;65.35</div>
+                    <div className={styles.tokenVal}>$85,814.75</div>
+                  </div>
+                </div>
+                <div className={styles.toeknItem}>
+                  <div className={styles.tokenMoreImg}>
+                    more
+                  </div>
+                  <div className={styles.tokenDetail}>
+                    <div className={styles.tokenMoreNum}>
+                      +15
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.nftWrap}>
+                <div className={styles.tokenWrapLeft}>
+                  <div>NFT</div>
+                  <img src={tokenLinePic} alt="tokenLinePic" />
+                </div>
+                <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
+              </div>
+              <div className={styles.nftTips}>
+                <span>共持有&nbsp;<span style={{fontSize: '17rem', color: '#454C66'}}>12</span>&nbsp;个NFT &nbsp;&nbsp; 来自于 <span style={{
+                  fontSize: '17rem', color: '#454C66'
+                }}>24</span>&nbsp;个不同的项目</span>
+              </div>
+              <div className={styles.nftList}>
+                <img className={styles.nftItem} src={demo4} alt="img"/>
+                <img className={styles.nftItem} src={demo4} alt="img"/>
+                <img className={styles.nftItem} src={demo4} alt="img"/>
+                <img className={styles.nftItem} src={demo4} alt="img"/>
+                <img className={styles.nftItem} src={demo4} alt="img"/>
+                <div className={styles.nftMore}>
+                  <div className={styles.nftNum}>+&nbsp;14</div>
+                  <div className={styles.nftMoreTips}>more</div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.posterBottomWrap}>
+              <div className={styles.bottomTips}>扫码进入我的web3身份空间</div>
+              <div className={styles.qrImgWrap}></div>
+            </div>
+          </div>
+        ), document.getElementsByTagName('body')[0])
+      }
     </>
   )
 }
