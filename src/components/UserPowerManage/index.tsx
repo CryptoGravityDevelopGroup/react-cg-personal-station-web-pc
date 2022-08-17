@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from "antd";
+import html2canvas from 'html2canvas';
 import Modal from '../Modal/index.tsx';
 import QuestionAndAnswer from "../QuestionAndAnswer/index.tsx";
 import { getTokenList, upDateUsers, upDateQuestion, getUsersInfo } from '../../api/user';
@@ -26,6 +27,8 @@ export default function Index() {
   const [menuListStatus, setMenuListStatus] = useState(false);
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
   const [isQAModalVisible, setIsQAModalVisible] = useState(false);
+  const [isPosterModalVisible, setisPosterModalVisible] = useState(false);
+  const posterDom = useRef();
   const [formdata, setFormdata] = useState({
     tags:[],
     qa:[]
@@ -56,6 +59,10 @@ export default function Index() {
     setIsQAModalVisible(true);
     setMenuListStatus(false);
   }
+  const showMyQRCode = () => {
+    setisPosterModalVisible(true);
+    setMenuListStatus(false);
+  }
   const handleProfileModalOk = () => {
     formdata.ethAddress = walletAddress;
     formdata.tags = JSON.stringify(formdata.tags);
@@ -75,11 +82,28 @@ export default function Index() {
     })
     setIsQAModalVisible(false);
   };
-  const showMyQRCode = () => {
-
-  }
   const handleLogout = () => {
     logout();
+  }
+  // 保存成png格式的图片
+  const saveAsPNG = (canvas) => {
+    return canvas.toDataURL("image/png");
+  }
+  const downLoad = (url) => {
+    var oA = document.createElement("a");
+    oA.download = '个人海报';// 设置下载的文件名，默认是'下载'
+    oA.href = url;
+    document.body.appendChild(oA);
+    oA.click();
+    oA.remove(); // 下载之后把创建的元素删除
+}
+  const downPoster = () => {
+    console.log(posterDom);
+    html2canvas(posterDom.current).then(function(canvas) {
+      console.log('canvas');
+      downLoad(saveAsPNG(canvas))
+      // document.body.appendChild(canvas);
+    });
   }
   useEffect(() => {
     if(!walletAddress) return;
@@ -109,6 +133,16 @@ export default function Index() {
       }
     })
   }, [walletAddress]);
+
+  useEffect(() => {
+    let bodyDOM = document.getElementsByTagName('body')[0];
+    if(isPosterModalVisible) {
+      bodyDOM.style.overflow = 'hidden';
+    }
+    if(!isPosterModalVisible) {
+      bodyDOM.style.overflow = 'auto';
+    }
+  }, [isPosterModalVisible])
   return (
     <>
       <div className={styles.warp} ref={menuList}>
@@ -201,93 +235,104 @@ export default function Index() {
         </div>
       </Modal>
       {
+        isPosterModalVisible === true &&
         ReactDOM.createPortal((
-          <div className={styles.posterWrap}>
-            <div className={styles.posterHeaderWrap}>
-              <img src={logoPic} alt="logoutPic" />
-            </div>
-            <div className={styles.posterContentWrap}>
-              <div className={styles.userHeadPic}>
-                <img src={defaultUserPic} alt="defaultUserPic" />
-              </div>
-              <div className={styles.userName}>leo zeng</div>
-              <div className={styles.tokenWrap}>
-                <div className={styles.tokenWrapLeft}>
-                  <div >Token</div>
-                  <img src={tokenLinePic} alt="tokenLinePic" />
+          <>
+            <div className={styles.modalMask} onClick={() => {
+              setisPosterModalVisible(false);
+            }}></div>
+            <div ref={posterDom} className={styles.posterModuleWrap}>
+              <div className={styles.posterWrap}>
+                <div className={styles.posterHeaderWrap}>
+                  <img src={logoPic} alt="logoutPic" />
                 </div>
-                <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
-              </div>
-              <div className={styles.tokenTips}>
-                <span>共持有<span style={{fontSize: '17rem', color: '#454C66'}}>&nbsp;12&nbsp;</span>种token &nbsp;&nbsp; 共价值 <span style={{
-                  fontSize: '17rem', color: '#454C66'
-                }}>$46,764.54</span></span>
-              </div>
-              <div className={styles.tokenList}>
-                <div className={styles.toeknItem}>
-                  <img src={ethLogo} alt="" />
-                  <div className={styles.tokenDetail}>
-                    <div className={styles.tokenName}>Ethereum</div>
-                    <div className={styles.tokenNum}>x&nbsp;65.35</div>
-                    <div className={styles.tokenVal}>$85,814.75</div>
+                <div className={styles.posterContentWrap}>
+                  <div className={styles.userHeadPic}>
+                    <img src={defaultUserPic} alt="defaultUserPic" />
                   </div>
-                </div>
-                <div className={styles.toeknItem}>
-                  <img src={ethLogo} alt="" />
-                  <div className={styles.tokenDetail}>
-                    <div className={styles.tokenName}>Ethereum</div>
-                    <div className={styles.tokenNum}>x&nbsp;65.35</div>
-                    <div className={styles.tokenVal}>$85,814.75</div>
+                  <div className={styles.userName}>leo zeng</div>
+                  <div className={styles.tokenWrap}>
+                    <div className={styles.tokenWrapLeft}>
+                      <div >Token</div>
+                      <img src={tokenLinePic} alt="tokenLinePic" />
+                    </div>
+                    <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
                   </div>
-                </div>
-                <div className={styles.toeknItem}>
-                  <img src={ethLogo} alt="" />
-                  <div className={styles.tokenDetail}>
-                    <div className={styles.tokenName}>Ethereum</div>
-                    <div className={styles.tokenNum}>x&nbsp;65.35</div>
-                    <div className={styles.tokenVal}>$85,814.75</div>
+                  <div className={styles.tokenTips}>
+                    <span>共持有<span style={{fontSize: '17rem', color: '#454C66'}}>&nbsp;12&nbsp;</span>种token &nbsp;&nbsp; 共价值 <span style={{
+                      fontSize: '17rem', color: '#454C66'
+                    }}>$46,764.54</span></span>
                   </div>
-                </div>
-                <div className={styles.toeknItem}>
-                  <div className={styles.tokenMoreImg}>
-                    more
+                  <div className={styles.tokenList}>
+                    <div className={styles.toeknItem}>
+                      <img src={ethLogo} alt="" />
+                      <div className={styles.tokenDetail}>
+                        <div className={styles.tokenName}>Ethereum</div>
+                        <div className={styles.tokenNum}>x&nbsp;65.35</div>
+                        <div className={styles.tokenVal}>$85,814.75</div>
+                      </div>
+                    </div>
+                    <div className={styles.toeknItem}>
+                      <img src={ethLogo} alt="" />
+                      <div className={styles.tokenDetail}>
+                        <div className={styles.tokenName}>Ethereum</div>
+                        <div className={styles.tokenNum}>x&nbsp;65.35</div>
+                        <div className={styles.tokenVal}>$85,814.75</div>
+                      </div>
+                    </div>
+                    <div className={styles.toeknItem}>
+                      <img src={ethLogo} alt="" />
+                      <div className={styles.tokenDetail}>
+                        <div className={styles.tokenName}>Ethereum</div>
+                        <div className={styles.tokenNum}>x&nbsp;65.35</div>
+                        <div className={styles.tokenVal}>$85,814.75</div>
+                      </div>
+                    </div>
+                    <div className={styles.toeknItem}>
+                      <div className={styles.tokenMoreImg}>
+                        more
+                      </div>
+                      <div className={styles.tokenDetail}>
+                        <div className={styles.tokenMoreNum}>
+                          +15
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.tokenDetail}>
-                    <div className={styles.tokenMoreNum}>
-                      +15
+                  <div className={styles.nftWrap}>
+                    <div className={styles.tokenWrapLeft}>
+                      <div>NFT</div>
+                      <img src={tokenLinePic} alt="tokenLinePic" />
+                    </div>
+                    <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
+                  </div>
+                  <div className={styles.nftTips}>
+                    <span>共持有&nbsp;<span style={{fontSize: '17rem', color: '#454C66'}}>12</span>&nbsp;个NFT &nbsp;&nbsp; 来自于 <span style={{
+                      fontSize: '17rem', color: '#454C66'
+                    }}>24</span>&nbsp;个不同的项目</span>
+                  </div>
+                  <div className={styles.nftList}>
+                    <img className={styles.nftItem} src={demo4} alt="img"/>
+                    <img className={styles.nftItem} src={demo4} alt="img"/>
+                    <img className={styles.nftItem} src={demo4} alt="img"/>
+                    <img className={styles.nftItem} src={demo4} alt="img"/>
+                    <img className={styles.nftItem} src={demo4} alt="img"/>
+                    <div className={styles.nftMore}>
+                      <div className={styles.nftNum}>+&nbsp;14</div>
+                      <div className={styles.nftMoreTips}>more</div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className={styles.nftWrap}>
-                <div className={styles.tokenWrapLeft}>
-                  <div>NFT</div>
-                  <img src={tokenLinePic} alt="tokenLinePic" />
-                </div>
-                <img className={styles.arrowPic} src={arrowPic} alt="arrowPic" />
-              </div>
-              <div className={styles.nftTips}>
-                <span>共持有&nbsp;<span style={{fontSize: '17rem', color: '#454C66'}}>12</span>&nbsp;个NFT &nbsp;&nbsp; 来自于 <span style={{
-                  fontSize: '17rem', color: '#454C66'
-                }}>24</span>&nbsp;个不同的项目</span>
-              </div>
-              <div className={styles.nftList}>
-                <img className={styles.nftItem} src={demo4} alt="img"/>
-                <img className={styles.nftItem} src={demo4} alt="img"/>
-                <img className={styles.nftItem} src={demo4} alt="img"/>
-                <img className={styles.nftItem} src={demo4} alt="img"/>
-                <img className={styles.nftItem} src={demo4} alt="img"/>
-                <div className={styles.nftMore}>
-                  <div className={styles.nftNum}>+&nbsp;14</div>
-                  <div className={styles.nftMoreTips}>more</div>
+                <div className={styles.posterBottomWrap}>
+                  <div className={styles.bottomTips}>扫码进入我的web3身份空间</div>
+                  <div className={styles.qrImgWrap}></div>
                 </div>
               </div>
+              <div className={styles.downPoster} onClick={() => {
+                downPoster()
+              }}></div>
             </div>
-            <div className={styles.posterBottomWrap}>
-              <div className={styles.bottomTips}>扫码进入我的web3身份空间</div>
-              <div className={styles.qrImgWrap}></div>
-            </div>
-          </div>
+          </>
         ), document.getElementsByTagName('body')[0])
       }
     </>
