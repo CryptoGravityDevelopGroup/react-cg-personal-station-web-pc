@@ -4,6 +4,7 @@
   padding: 24rem 15rem;
   max-height: 500px;
   overflow-y: auto;
+  min-height: 555rem;
 }
 .headerPicItem {
   width: 144rem;
@@ -29,4 +30,9 @@
   top: 8px;
   right: 8px;
 }
-
+.modalBottom {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

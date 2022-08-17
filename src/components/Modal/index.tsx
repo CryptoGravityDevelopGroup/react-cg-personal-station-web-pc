@@ -5,7 +5,7 @@ import styles from './index.module.css';
 import closePic from '../../static/close.png';
 
 export default function Index(props) {
-  const { visible, children, onOk, title, onClose } = props;
+  const { visible, children, onOk, title, onClose, modalBtn } = props;
   
   const handleOk = () => {
     onOk && onOk();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Button } from "antd";
 import styles from './index.module.css';
 import Modal from '../Modal/index.tsx';
 import tickPic from '../../static/tick.png';
@@ -40,6 +40,15 @@ export default function Index(props) {
               </div>  
             )
           }
+        </div>
+        <div className={styles.modalBottom}>
+          <div className='button'>
+            <Button size='large' type="primary" shape="round" block onClick={() => {
+              handleOk(headerPicIndex);
+            }}>
+              Ok
+            </Button>
+          </div>
         </div>
       </Modal>
     </>
