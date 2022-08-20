@@ -1,9 +1,6 @@
 import Web3 from "web3";
-import { useNavigate } from 'react-router-dom';
-
 
 let web3 = new Web3(Web3.givenProvider);
-// let web3 = new Web3('https://ropsten.infura.io/v3/002d525e2a0f405dbcc3de0c03b7ad30');
 
 // 连接钱包
 export async function connectWallte() {
@@ -31,7 +28,7 @@ export function getCurAddress() {
   if (window.ethereum && window.ethereum.selectedAddress && window.ethereum.selectedAddress.length > 0) {
     return window.ethereum.selectedAddress;
   } else {
-    window.location.pathname = "/main";
+    window.location.href = "/#/main";
   }
 }
 // 签名
@@ -51,5 +48,5 @@ export function handleSignMessage(publicAddress, nonce) {
 export function logout() {
   localStorage.clear('ethNonce');
   localStorage.clear('ethAddress');
-  window.location.href='/main';
+  window.location.href='/#/main';
 }

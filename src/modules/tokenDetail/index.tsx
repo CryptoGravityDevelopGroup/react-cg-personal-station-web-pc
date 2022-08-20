@@ -1,33 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import Header from "../../components/Header/index.tsx";
 import style from './index.module.css';
-import { getTokenList } from '../../api/user';
-import { getCurAddress } from '../../utils/tool';
 
-export default function Index() {
-  const [tokenList, setTokenList] = useState([]);
-  const walletAddress = getCurAddress();
-  useEffect(() => {
-    // 获取Token
-    getTokenList({
-      "ethAddress": walletAddress,
-      "tokenType":"token"
-    }).then((res) => {
-      const response = res.data;
-      if(response.code === 0) {
-        setTokenList(response.data.map((item) => {
-          return {
-            tokenLogo: item.logo,
-            tokenName: item.name,
-            tokenNum: item.balance / Math.pow(10,item.tokenDecimal),
-            tokenPrice:'TODO'
-          }
-        }));
-      }
-    });
-  }, [])
-  
+let Index = ({tokenDetails, tokenList}) => {
   return (
     <div className={style.wrap}>
       <Header goHomeBtnStatus={true}/>
@@ -36,8 +13,8 @@ export default function Index() {
           Token
         </div>
         <div className={style.detail}>
-          <div>共持有12种token，共价值 $TODO</div>
-          <div>其中持有最多的是Ethereum 价值$TODO</div>
+          <div>共持有${tokenList.length}种token，共价值 ${tokenDetails.allTokenVal}</div>
+          <div>其中持有最多的是{tokenDetails.MaxTokenItem.tokenName} 价值${tokenDetails.MaxTokenItem.tokenPrice * tokenDetails.MaxTokenItem.tokenNum}</div>
         </div>
       </div>
       <div className={style.tokenList}>
@@ -61,3 +38,10 @@ export default function Index() {
     </div>
   )
 }
+function mapStateToProps(state) {
+  return {
+    tokenList: state.tokenList,
+    tokenDetails: state.tokenDetails
+  }
+}
+export default Index = connect(mapStateToProps, null)(Index);

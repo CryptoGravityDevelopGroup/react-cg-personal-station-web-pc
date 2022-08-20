@@ -18,12 +18,12 @@ import arrowDownPic from '../../static/arrow-down.png';
 import dotPic from '../../static/dot.png';
 import { connect } from 'react-redux';
 
-let Index = ({changeUserInfo, changeTokenList, changeNftList}) => {
+let Index = ({changeUserInfo, changeTokenList, changeNftList, changeTokenDetails}) => {
   const navigate = useNavigate();
   const walletAddress = getCurAddress();
   const [tokenList, setTokenList] = useState([]);
   const [allTokenVal, setAllTokenVal] = useState(0);
-  const [maxTokenVal, setMaxTokenVal] = useState(0);
+  const [maxTokenItem, setMaxTokenItem] = useState({});
   const [nftList, setNftList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [QAList, setQAList] = useState([]);
@@ -104,15 +104,20 @@ let Index = ({changeUserInfo, changeTokenList, changeNftList}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletAddress]);
   useEffect(() => {
-    let tempAllTokenVal = 0, tempMaxTokenVal  = 0;
+    let tempAllTokenVal = 0, tempMaxTokenVal  = 0, tempMaxToken = {};
     tokenList.forEach(item => {
       tempAllTokenVal = tempAllTokenVal + item.tokenPrice;
       if (item.tokenPrice > tempMaxTokenVal) {
         tempMaxTokenVal = item.tokenPrice;
+        tempMaxToken = item;
       } 
     })
     setAllTokenVal(tempAllTokenVal);
-    setMaxTokenVal(tempMaxTokenVal);
+    setMaxTokenItem(tempMaxToken);
+    changeTokenDetails({
+      allTokenVal: tempAllTokenVal,
+      MaxTokenItem: tempMaxToken
+    })
   }, [tokenList])
   
   return (
@@ -127,9 +132,9 @@ let Index = ({changeUserInfo, changeTokenList, changeNftList}) => {
         </div>
         <div className={style.tagWrap}>
           {
-            userInfo.tags && userInfo.tags.map((item) => {
+            userInfo.tags && userInfo.tags.map((item, index) => {
               return (
-                <div className={style.tagItem}>
+                <div key={index} className={style.tagItem}>
                   {item}
                 </div>
               )
@@ -167,7 +172,7 @@ let Index = ({changeUserInfo, changeTokenList, changeNftList}) => {
             tokenList.length !== 0 && (
               <div className={style.describeContent}>
                 <div>共持有{tokenList.length}种token，共价值 ${allTokenVal}</div>
-                <div>其中持有最多的是Ethereum 价值${maxTokenVal}</div>
+                <div>其中持有最多的是{maxTokenItem.tokenName} 价值${maxTokenVal}</div>
               </div>
             )
           }
@@ -219,8 +224,8 @@ let Index = ({changeUserInfo, changeTokenList, changeNftList}) => {
             nftList.length !== 0 && (
               <>
                 <div className={style.nftDescribeContent}>
-                  <div>共持有{nftList.length}个NFT，来自于24个不同项目</div>
-                  <div>最早2021年10月31日购买第一个nft，购买NFT共计花费24eth。其中xx、xx、xx项目的nft有着良好的市场表现</div>
+                  <div>A total of {nftlist.Length} NFTs from XX different projects</div>
+                  <div>The first NFT was purchased on XX, XXXX at the earliest, and the total cost of purchasing NFT was XXX. Among them, the NFT of XX, XX and XX projects has a good market performance</div>
                 </div>
                 <div className={style.nftShowMore} onClick={() => {
                   navigate('/nftDetail');
@@ -326,8 +331,14 @@ const mapDispatchToProps = (dispatch) => {
     changeTokenList: (value) => {
       dispatch({type: 'CHANGE_TOKEN_LIST', value})
     },
+    changeTokenDetails: (value) => {
+      dispatch({type: 'CHANGE_TOKEN_DETAILS', value})
+    },
     changeNftList: (value) => {
       dispatch({type: 'CHANGE_NFT_LIST', value})
+    },
+    changeNftDetails: (value) => {
+      dispatch({type: 'CHANGE_NFT_DETAILS', value})
     }
   }
 }

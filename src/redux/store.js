@@ -2,7 +2,12 @@ import { createStore } from 'redux';
 const initState = {
 	userInfo: {},
   tokenList: [],
-  nftList: []
+  nftList: [],
+	tokenDetails: {
+		allTokenVal: 0,
+		MaxTokenItem: {}
+	},
+	nftDetails: {}
 }
 const reducer = (state = initState, action) => {
 	switch (action.type) {
@@ -16,10 +21,20 @@ const reducer = (state = initState, action) => {
 				...state,
 				tokenList: action.value,
 			};
+		case 'CHANGE_TOKEN_DETAILS':
+			return {
+				...state,
+				tokenDetails: action.value,
+			};
 		case 'CHANGE_NFT_LIST':
 			return {
 				...state,
 				nftList: action.value,
+			};
+		case 'CHANGE_NFT_DETAILS':
+			return {
+				...state,
+				nftDetails: action.value,
 			};
 		default:
 			return state;
