@@ -11,7 +11,7 @@ export default function Index() {
           <img src={successPic} alt='successPic' />
         </div>
         <div className={style.title}>Created</div>
-        <div className={style.tips}>Congratulations you have successfully created your web3 identity home page</div>
+        <div className={style.tips}>Congratulations you have successfully created your Web 3.0 identity home page</div>
         <div className='button' onClick={() => {
           navigate('/profile');
         }}>

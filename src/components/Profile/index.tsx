@@ -12,6 +12,7 @@ import twitterPic from '@/static/twitter.png';
 import telegramPic from '@/static/telegram.png';
 import instagramPic from '@/static/instagram.png';
 import defaultUserPic from '@/static/default_user.png';
+import discordPic from '@/static/discord.png';
 
 export default function Index(props) {
   const { profileDataChange, initFormData, children, onFinishCallBack, onFinishFailedCallBack } = props;
@@ -181,12 +182,12 @@ export default function Index(props) {
               }} />
             </Form.Item>
             <Form.Item
-              label="Instagram"
-              name="Instagram"
+              label="Discord"
+              name="Discord"
             >
-              <Input placeholder="Enter your Instagram id" onChange={(event) => {
-                setFormdata({...formdata, ...{ instagramId: event.target.value }});
-              }} suffix={<img src={instagramPic} alt="instagramPic"/>}/>
+              <Input placeholder="Enter your Discord id" onChange={(event) => {
+                setFormdata({...formdata, ...{ discordId: event.target.value }});
+              }} suffix={<img src={discordPic} alt="discordPic"/>}/>
             </Form.Item>
             <Form.Item
               label="Twitter"
@@ -195,6 +196,14 @@ export default function Index(props) {
               <Input placeholder="Enter your Twitter id" onChange={(event) => {
                 setFormdata({...formdata, ...{ twitterId: event.target.value }});
               }} suffix={<img src={twitterPic} alt="twitterPic"/>}/>
+            </Form.Item>
+            <Form.Item
+              label="Instagram"
+              name="Instagram"
+            >
+              <Input placeholder="Enter your Instagram id" onChange={(event) => {
+                setFormdata({...formdata, ...{ instagramId: event.target.value }});
+              }} suffix={<img src={instagramPic} alt="instagramPic"/>}/>
             </Form.Item>
             <Form.Item
               label="Telegram"

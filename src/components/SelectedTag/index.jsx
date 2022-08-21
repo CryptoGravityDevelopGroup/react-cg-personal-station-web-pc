@@ -9,7 +9,7 @@ export default function Index(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTagList, setNewTagList] = useState([...initTagList]);
   const tagInputRed = useRef();
-  const recommendTagList = ['Investor', 'NFT collector', 'web3 investor', 'DAO founder', 'entrepreneur', 'leek', 'lost 100 million', 'crypto practitioner', 'all in web3', 'Front-end Engineer', 'Community Manager'];
+  const recommendTagList = ['Investor', 'NFT collector', 'Web 3.0 investor', 'DAO founder', 'entrepreneur', 'leek', 'lost 100 million', 'crypto practitioner', 'all in Web 3.0', 'Front-end Engineer', 'Community Manager'];
   const addNewTag = (value) => {
     if(newTagList.length + 1 <= 3) {
       newTagList.push(value);
