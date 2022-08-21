@@ -13,7 +13,7 @@ let Index = ({nftList}) =>  {
           NFT
         </div>
         <div className={style.detail}>
-          <div>A total of {nftlist.Length} NFTs from XX different projects</div>
+          <div>A total of {nftList.length} NFTs from XX different projects</div>
           <div>The first NFT was purchased on XX, XXXX at the earliest, and the total cost of purchasing NFT was XXX. Among them, the NFT of XX, XX and XX projects has a good market performance</div>
         </div>
       </div>

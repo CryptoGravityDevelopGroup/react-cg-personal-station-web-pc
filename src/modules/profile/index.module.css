@@ -78,19 +78,22 @@
   top: 28rem;
   left: 56rem;
   position: absolute;
-  font-size: 36px;
+  font-size: 36rem;
   font-weight: normal;
-  line-height: 45px;
+  line-height: 45rem;
   color: #2d2f35;
 }
 .describeContent {
-  font-size: 16px;
+  top: 28rem;
+  left: 189rem;
+  position: absolute;
+  font-size: 16rem;
   font-weight: normal;
-  line-height: 26px;
+  line-height: 26rem;
   color: #454c66;
-  margin-left: 28px;
 }
 .tokenList {
+  margin-top: 42rem;
   display: flex;
   justify-content: space-between;
 }
@@ -141,9 +144,9 @@
   cursor: pointer;
 }
 .showMoreContent {
-  font-size: 16px;
+  font-size: 16rem;
   font-weight: normal;
-  line-height: 22px;
+  line-height: 22rem;
   color: #454c66;
 }
 .nftWrap {
@@ -173,6 +176,9 @@
   font-weight: normal;
   line-height: 26rem;
   color: #454c66;
+  max-width: 350rem;
+  margin-right: 87rem;
+  margin-top: 24rem;
 }
 .nftShowMore {
   width: 149px;

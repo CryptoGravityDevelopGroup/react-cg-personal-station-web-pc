@@ -34,7 +34,7 @@
 .addTagInput {
   border: 0;
   height: 32px;
-  min-width: 180px;
+  min-width: 500rem;
 }
 .tagAreaInputArea {
   display: flex;
@@ -108,4 +108,10 @@ input[type="text"]:focus.addTagInput {
   color: rgba(0, 0, 0, 0.45);
   font-size: 14px;
   line-height: 1.5715;
+}
+.modalBottom {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

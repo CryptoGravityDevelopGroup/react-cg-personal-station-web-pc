@@ -171,8 +171,8 @@ let Index = ({changeUserInfo, changeTokenList, changeNftList, changeTokenDetails
           {
             tokenList.length !== 0 && (
               <div className={style.describeContent}>
-                <div>共持有{tokenList.length}种token，共价值 ${allTokenVal}</div>
-                <div>其中持有最多的是{maxTokenItem.tokenName} 价值${maxTokenVal}</div>
+                <div>A total of {tokenList.length} tokens are held, with a total value of ${allTokenVal}</div>
+                <div>Among them, the most held is {maxTokenItem.tokenName} value ${maxTokenItem.tokenNum * maxTokenItem.tokenPrice}</div>
               </div>
             )
           }
@@ -224,7 +224,7 @@ let Index = ({changeUserInfo, changeTokenList, changeNftList, changeTokenDetails
             nftList.length !== 0 && (
               <>
                 <div className={style.nftDescribeContent}>
-                  <div>A total of {nftlist.Length} NFTs from XX different projects</div>
+                  <div>A total of {nftList.length} NFTs from XX different projects</div>
                   <div>The first NFT was purchased on XX, XXXX at the earliest, and the total cost of purchasing NFT was XXX. Among them, the NFT of XX, XX and XX projects has a good market performance</div>
                 </div>
                 <div className={style.nftShowMore} onClick={() => {

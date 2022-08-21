@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+import { Button } from "antd";
 import Modal from '../Modal/index.tsx';
 import styles from './index.module.css';
 import addTagPic from '../../static/add-tag.png';
@@ -9,7 +9,7 @@ export default function Index(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTagList, setNewTagList] = useState([...initTagList]);
   const tagInputRed = useRef();
-  const recommendTagList = ['Investor', 'NFT collector', 'web3 investor', 'dao founder', 'entrepreneur', 'leek', 'lost 100 million', 'crypto practitioner', 'all in web3'];
+  const recommendTagList = ['Investor', 'NFT collector', 'web3 investor', 'DAO founder', 'entrepreneur', 'leek', 'lost 100 million', 'crypto practitioner', 'all in web3', 'Front-end Engineer', 'Community Manager'];
   const addNewTag = (value) => {
     if(newTagList.length + 1 <= 3) {
       newTagList.push(value);
@@ -51,7 +51,7 @@ export default function Index(props) {
           setIsModalVisible(true);
         }} />
       </div>
-      <Modal visible={isModalVisible} title='tag' onClose={() => {
+      <Modal visible={isModalVisible} title='Tag' onClose={() => {
         setIsModalVisible(false);
       }}>
         <div className={ styles.modalContent }>
@@ -71,7 +71,7 @@ export default function Index(props) {
                 })
               }
               {
-                newTagList.length < 3 && <input ref={tagInputRed} className={styles.addTagInput} type="text" placeholder='多个标签请用回车分隔' onKeyUp={(e) => {
+                newTagList.length < 3 && <input ref={tagInputRed} className={styles.addTagInput} type="text" placeholder='Separate multiple tags with carriage returns' onKeyUp={(e) => {
                   handleInputKeyUp(e.keyCode);
                 }} />
               }
@@ -84,7 +84,7 @@ export default function Index(props) {
               newTagList.length === 3 && 'Up to 3 tags can be entered'
             }</div>
             <div className={styles.tagRecommendWrap}>
-              <div className={styles.tagsTitle}>推荐</div>
+              <div className={styles.tagsTitle}>recommend</div>
               <div className={styles.tagsContent}>
                 {
                   recommendTagList.map((item, index) => {
@@ -97,6 +97,15 @@ export default function Index(props) {
                 }
               </div>
             </div>
+          </div>
+        </div>
+        <div className={styles.modalBottom}>
+          <div className='button'>
+            <Button size='large' type="primary" shape="round" block onClick={() => {
+              setIsModalVisible(false);
+            }}>
+              Ok
+            </Button>
           </div>
         </div>
       </Modal>
